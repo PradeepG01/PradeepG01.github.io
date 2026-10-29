@@ -12,6 +12,10 @@ A single-page portfolio built with plain HTML, CSS, and JavaScript — no framew
 - **About** — background and location
 - **Experience** — work history
 - **Projects** — links to my GitHub repos:
+  - [ai-support-agent](https://github.com/PradeepG01/ai-support-agent)
+  - [kyc-orchestrator](https://github.com/PradeepG01/kyc-orchestrator)
+  - [defect-vision](https://github.com/PradeepG01/defect-vision)
+  - [shipment-tracking-service](https://github.com/PradeepG01/shipment-tracking-service)
   - [finance-tracker-api](https://github.com/PradeepG01/finance-tracker-api)
   - [credit-risk-prediction](https://github.com/PradeepG01/credit-risk-prediction)
   - [fintech-analytics-dashboard](https://github.com/PradeepG01/fintech-analytics-dashboard)
