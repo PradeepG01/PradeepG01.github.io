@@ -107,8 +107,21 @@
   .links .btn{padding:9px 18px; font-size:14px; color:#04140D;}
 
   /* ---------- hero ---------- */
-  .hero{padding:80px 0 72px;}
-  .hero-grid{display:grid; grid-template-columns:1.08fr .92fr; gap:60px; align-items:center;}
+  .hero{position:relative; padding:36px 0 0; overflow:hidden; isolation:isolate; --wordfs:clamp(84px,16.5vw,280px);}
+  .hero-word{
+    position:absolute; left:50%; bottom:-.3em; z-index:-1; pointer-events:none; user-select:none; white-space:nowrap;
+    transform:translateX(calc(-50% + var(--px,0px)));
+    font-family:var(--serif); font-weight:700; font-size:var(--wordfs); line-height:1; letter-spacing:-.06em;
+    color:transparent; -webkit-text-stroke:1.5px rgba(79,224,166,.34);
+    background:linear-gradient(180deg,rgba(79,224,166,.18) 0%,rgba(79,224,166,0) 75%); -webkit-background-clip:text; background-clip:text;
+  }
+  .hero-stage{
+    position:relative; display:grid; align-items:end; gap:0 36px;
+    grid-template-columns:minmax(0,1.2fr) minmax(300px,430px) minmax(0,.8fr);
+    grid-template-areas:"copy fig side";
+  }
+  .hero-copy{grid-area:copy; padding-bottom:calc(var(--wordfs) * .62 + 40px);}
+  .hero-side{grid-area:side; padding-bottom:calc(var(--wordfs) * .62 + 40px); justify-self:end;}
   .avail{
     display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:500; color:var(--sage);
     border:1px solid var(--line-2); border-radius:999px; padding:7px 15px 7px 11px; background:rgba(17,40,31,.5);
@@ -116,25 +129,21 @@
   .pulse{width:8px; height:8px; border-radius:50%; background:var(--lime); position:relative; flex-shrink:0;}
   .pulse::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--lime); opacity:0; animation:ping 2.4s var(--ease) infinite;}
   @keyframes ping{0%{transform:scale(.6); opacity:.8;} 100%{transform:scale(1.9); opacity:0;}}
-  .hero h1{margin-top:24px; font-size:clamp(44px,6.6vw,88px); font-weight:700; line-height:.98; letter-spacing:-.05em;}
+  .hero h1{margin-top:22px; font-size:clamp(38px,4vw,56px); font-weight:700; line-height:1; letter-spacing:-.05em;}
   .hero h1 .ln{display:block; overflow:hidden; padding-bottom:.08em;}
   .hero h1 .ln > span{display:inline-block;}
-  .hero h1 .ln:last-child > span{
-    background:linear-gradient(100deg,var(--mint) 0%,var(--jade) 35%,var(--emerald) 60%,var(--gold) 100%);
-    background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:sheen 9s ease-in-out infinite alternate;
-  }
-  @keyframes sheen{to{background-position:100% 0;}}
-  .hero .role{margin-top:18px; display:flex; align-items:center; gap:14px; font-size:15px; font-weight:600; color:var(--gold); letter-spacing:.01em;}
+  .hero .role{margin-top:16px; display:flex; align-items:center; gap:14px; font-size:15px; font-weight:600; color:var(--gold); letter-spacing:.01em;}
   .hero .role::before{content:""; width:36px; height:1px; background:linear-gradient(90deg,var(--gold),transparent);}
-  .hero .lede{margin-top:22px; font-size:clamp(17px,1.6vw,19px); color:var(--muted); max-width:33em;}
+  .hero .lede{margin-top:18px; font-size:17px; color:var(--muted); max-width:30em;}
   .hero .lede b{color:var(--text); font-weight:600;}
-  .hero-cta{margin-top:34px; display:flex; flex-wrap:wrap; gap:12px;}
-  .facts{margin-top:46px; display:grid; grid-template-columns:repeat(4,auto); justify-content:start; gap:0; border-top:1px solid var(--line); padding-top:22px;}
-  .facts div{padding-right:28px; margin-right:28px; border-right:1px solid var(--line);}
-  .facts div:last-child{border-right:none; margin-right:0; padding-right:0;}
-  .facts strong{display:block; font-family:var(--serif); font-weight:600; letter-spacing:-.04em; font-size:30px; line-height:1; color:var(--mint);}
-  .facts span{display:block; font-size:13px; color:var(--dim); margin-top:6px;}
+  .hero-cta{margin-top:28px; display:flex; flex-wrap:wrap; gap:12px;}
+  .facts{list-style:none; display:flex; flex-direction:column; gap:22px; padding-left:24px; border-left:1px solid var(--line-2);}
+  .facts strong{display:block; font-family:var(--serif); font-weight:600; letter-spacing:-.04em; font-size:34px; line-height:1; color:var(--mint);}
+  .facts li:nth-child(2) strong{color:var(--teal);}
+  .facts li:nth-child(3) strong{color:var(--gold);}
+  .facts li:nth-child(4) strong{color:var(--lime);}
+  .facts span{display:block; font-size:13.5px; color:var(--dim); margin-top:6px;}
+  .hint{margin-top:30px; font-size:13.5px; font-weight:500; color:var(--sage); max-width:14em;}
 
   /* load sequence */
   .js .hero .seq{opacity:0; transform:translateY(18px);}
@@ -195,44 +204,41 @@
   .steps.swap{animation:swap .45s var(--ease);}
   @keyframes swap{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
 
-  /* ---------- hero character ---------- */
-  .buddy{position:relative; display:flex; flex-direction:column; align-items:center;}
-  .buddy-btn{
-    display:block; width:100%; max-width:480px; padding:0; margin:0; border:0; background:none; cursor:pointer;
-    border-radius:50%; -webkit-tap-highlight-color:transparent;
+  /* ---------- hero figure ---------- */
+  .hero-fig{grid-area:fig; position:relative; align-self:end;}
+  .hero-fig::before{
+    content:""; position:absolute; left:4%; right:4%; top:4%; aspect-ratio:1; border-radius:50%; z-index:-1;
+    background:radial-gradient(closest-side, rgba(31,191,128,.42), rgba(31,191,128,.12) 62%, transparent);
   }
-  .buddy-btn:focus-visible{outline-offset:-14px; border-radius:50%;}
-  .buddy-btn svg{display:block; width:100%; height:auto; overflow:visible;}
-  .buddy .ring{transform-origin:210px 250px; animation:ringspin 60s linear infinite;}
-  @keyframes ringspin{to{transform:rotate(360deg);}}
-  .buddy .person{transform-origin:210px 500px; animation:breathe 4.5s ease-in-out infinite;}
-  @keyframes breathe{50%{transform:scaleY(1.012) translateY(-2px);}}
-  .buddy .head{transform-box:view-box; transform-origin:210px 300px;}
-  .buddy .eyes{transform-box:fill-box; transform-origin:center; transition:transform .09s ease-in;}
-  .buddy .eyes.blink{transform:scaleY(.08);}
-  .buddy .brows{transition:transform .25s var(--ease);}
-  .buddy .mouth-grin{opacity:0; transition:opacity .2s;}
-  .buddy .mouth-calm{transition:opacity .2s;}
-  .buddy .cheek{transition:opacity .3s;}
-  .buddy .badge{animation:floaty 6s ease-in-out infinite;}
-  .buddy .b2{animation-delay:-1.5s;} .buddy .b3{animation-delay:-3s;} .buddy .b4{animation-delay:-4.5s;}
-  @keyframes floaty{50%{transform:translateY(-10px);}}
-  .buddy-btn:hover .brows, .buddy.happy .brows{transform:translateY(-5px);}
-  .buddy.happy .mouth-grin{opacity:1;}
-  .buddy.happy .mouth-calm{opacity:0;}
-  .buddy.happy .cheek{opacity:.9;}
-  .buddy.hop .person{animation:hop .6s var(--ease);}
-  @keyframes hop{30%{transform:translateY(-14px) rotate(-1.5deg);} 60%{transform:translateY(0) rotate(1deg);} 100%{transform:none;}}
+  .person-btn{display:block; width:100%; padding:0; margin:0; border:0; background:none; cursor:pointer; border-radius:28px; -webkit-tap-highlight-color:transparent;}
+  .person-btn:focus-visible{outline-offset:-6px;}
+  .person-btn svg{display:block; width:100%; height:auto; overflow:visible;}
+  .hero-fig .person{transform-box:view-box; transform-origin:210px 450px; animation:breathe 5s ease-in-out infinite;}
+  @keyframes breathe{50%{transform:translateY(-2.5px);}}
+  .hero-fig .arm-l{transform-box:view-box; transform-origin:124px 282px; transform:rotate(3deg); transition:transform .6s var(--ease);}
+  .hero-fig .arm-r{transform-box:view-box; transform-origin:296px 282px; transform:rotate(-3deg);}
+  .hero-fig .fore{transform-box:view-box; transform-origin:124px 366px; transition:transform .6s var(--ease);}
+  .hero-fig.waving .arm-l{transform:rotate(84deg);}
+  .hero-fig.waving .fore{transform:rotate(96deg); animation:wave .62s ease-in-out .5s 3;}
+  @keyframes wave{0%,100%{transform:rotate(96deg);} 30%{transform:rotate(80deg);} 70%{transform:rotate(112deg);}}
+  .hero-fig #eyes{transform-box:fill-box; transform-origin:center; transition:transform .09s ease-in;}
+  .hero-fig #eyes.blink{transform:scaleY(.1);}
+  .hero-fig #brows{transition:transform .3s var(--ease);}
+  .person-btn:hover #brows, .hero-fig.happy #brows{transform:translateY(-2.5px);}
+  .hero-fig .mouth-grin{opacity:0; transition:opacity .2s;}
+  .hero-fig .mouth-calm{transition:opacity .2s;}
+  .hero-fig.happy .mouth-grin{opacity:1;}
+  .hero-fig.happy .mouth-calm{opacity:0;}
+  .hero-fig .blush{opacity:0; transition:opacity .3s;}
+  .hero-fig.happy .blush{opacity:.28;}
   .bubble{
-    position:absolute; top:2%; left:-2%; z-index:2; max-width:220px;
+    position:absolute; top:3%; left:60%; z-index:2; width:max-content; max-width:210px;
     background:var(--text); color:#06120D; font-weight:700; font-size:15px; line-height:1.35;
     padding:12px 16px; border-radius:18px 18px 18px 4px;
-    box-shadow:0 18px 40px -18px rgba(0,0,0,.7);
-    transform-origin:bottom left; transition:transform .35s var(--ease), opacity .35s;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.7); transform-origin:bottom left;
   }
   .bubble.pop{animation:pop .45s var(--ease);}
   @keyframes pop{0%{transform:scale(.6); opacity:0;} 100%{transform:none; opacity:1;}}
-  .buddy-hint{margin-top:6px; font-size:13.5px; color:var(--dim); font-weight:500;}
 
   /* ---------- demo section ---------- */
   .demo-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center;}
@@ -421,9 +427,15 @@
   footer{padding:20px 0 48px; text-align:center; color:var(--dim); font-size:14px;}
 
   /* ---------- responsive ---------- */
+  @media (max-width:1080px){
+    .hero-stage{grid-template-columns:minmax(0,1fr) minmax(280px,380px); grid-template-areas:"copy fig" "side fig";}
+    .hero-copy{padding-bottom:28px; align-self:end;}
+    .hero-side{justify-self:stretch; align-self:start; margin-top:30px;}
+    .facts{flex-direction:row; flex-wrap:wrap; gap:18px 30px; padding-left:0; border-left:none; padding-top:20px; border-top:1px solid var(--line-2);}
+    .facts strong{font-size:28px;}
+    .hint{display:none;}
+  }
   @media (max-width:980px){
-    .hero-grid{grid-template-columns:1fr; gap:48px;}
-    .buddy{max-width:460px; margin:0 auto; width:100%;}
     .demo-grid{grid-template-columns:1fr; gap:36px;}
     .about{grid-template-columns:minmax(0,300px) 1fr; grid-template-areas:"pic text" "card card"; gap:32px 40px;}
     .plist{grid-template-columns:1fr 1fr;}
@@ -442,9 +454,12 @@
     .links .btn{justify-content:center; margin-top:6px;}
     .menu-btn{display:block;}
     .block{padding:84px 0;}
-    .hero{padding:48px 0 56px;}
-    .facts{grid-template-columns:1fr 1fr; row-gap:20px;}
-    .facts div{margin-right:0; padding-right:0; border-right:none;}
+    .hero{padding-top:28px; --wordfs:23vw;}
+    .hero-stage{grid-template-columns:1fr; grid-template-areas:"copy" "side" "fig";}
+    .hero-copy, .hero-side{padding-bottom:0;}
+    .facts{display:grid; grid-template-columns:1fr 1fr;}
+    .hero-fig{width:100%; max-width:360px; margin:30px auto 0;}
+    .bubble{left:auto; right:-2%; max-width:165px; font-size:14px;}
     .plist{grid-template-columns:1fr;}
     .proj-card{padding:24px 22px;}
     .proj.feat h3{font-size:22px;}
@@ -495,178 +510,152 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="avail seq" style="--d:.05s"><span class="pulse"></span>Open to software, AI/ML and data roles in Bengaluru</span>
+    <div class="hero-word" id="heroWord" aria-hidden="true">PRADEEP</div>
+    <div class="wrap hero-stage">
+      <div class="hero-copy">
+        <span class="avail seq" style="--d:.05s"><span class="pulse"></span>Open to software, AI/ML and data roles</span>
         <h1>
           <span class="ln"><span style="--d:.15s">G Pradeep</span></span>
-          <span class="ln"><span style="--d:.3s">Kumar</span></span>
+          <span class="ln"><span style="--d:.28s">Kumar</span></span>
         </h1>
-        <p class="role seq" style="--d:.48s">Software Engineer, Backend &amp; AI</p>
-        <p class="lede seq" style="--d:.58s">I build <b>backend services and AI applications</b> end to end — LLM agents with RAG and tool calling, fintech microservices with resilient integrations, and computer-vision models tuned for the edge.</p>
-        <div class="hero-cta seq" style="--d:.7s">
+        <p class="role seq" style="--d:.45s">Software Engineer, Backend &amp; AI</p>
+        <p class="lede seq" style="--d:.55s">I build <b>backend services and AI applications</b> end to end — LLM agents, fintech microservices and computer-vision models, all tested and shipped through CI.</p>
+        <div class="hero-cta seq" style="--d:.66s">
           <a href="#projects" class="btn btn-main">See my projects</a>
           <a href="G_Pradeep_Kumar_Resume.pdf" class="btn btn-line" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg>
             Download resume
           </a>
         </div>
-        <div class="facts seq" style="--d:.82s">
-          <div><strong>7</strong><span>projects on GitHub</span></div>
-          <div><strong>3</strong><span>roles</span></div>
-          <div><strong>4</strong><span>certifications</span></div>
-          <div><strong>2025</strong><span>B.Tech CSE</span></div>
-        </div>
       </div>
 
-      <div class="buddy seq" style="--d:.35s">
-        <div class="bubble" id="bubble" role="status" aria-live="polite">Hey! I'm Pradeep 👋</div>
-        <button type="button" class="buddy-btn" id="buddy" aria-label="Illustrated character with arms crossed. Tap for a message.">
-          <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <div class="hero-fig seq" style="--d:.3s" id="heroFig">
+        <div class="bubble" id="bubble" role="status" aria-live="polite">Hey there! 👋</div>
+        <button type="button" class="person-btn" id="person" aria-label="Illustration of Pradeep. Tap to say hi.">
+          <svg viewBox="0 0 420 450" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
-              <radialGradient id="bgGlow" cx="50%" cy="42%" r="60%">
-                <stop offset="0" stop-color="#1F6B4C"/><stop offset=".65" stop-color="#0F3527"/><stop offset="1" stop-color="#0A2219"/>
-              </radialGradient>
-              <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#22342B"/><stop offset="1" stop-color="#111B16"/>
-              </linearGradient>
-              <linearGradient id="iris" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1E0F07"/><stop offset=".55" stop-color="#5A3016"/><stop offset="1" stop-color="#B07A3A"/>
-              </linearGradient>
-              <linearGradient id="sleeveBack" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1A925F"/><stop offset="1" stop-color="#106B48"/>
-              </linearGradient>
-              <linearGradient id="sleeveFront" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#34C98D"/><stop offset="1" stop-color="#1C9965"/>
-              </linearGradient>
-              <clipPath id="disc"><circle cx="210" cy="250" r="176"/><rect x="34" y="250" width="352" height="270"/></clipPath>
-              <linearGradient id="fadeG" x1="0" y1="0" x2="0" y2="1">
-                <stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
-              </linearGradient>
-              <mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="420" height="520"><rect x="0" y="0" width="420" height="520" fill="url(#fadeG)"/></mask>
+              <linearGradient id="shirtG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262D2A"/><stop offset="1" stop-color="#121614"/></linearGradient>
+              <linearGradient id="sleeveG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#151A18"/><stop offset=".55" stop-color="#29312D"/><stop offset="1" stop-color="#1A1F1D"/></linearGradient>
+              <linearGradient id="armG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A26845"/><stop offset=".45" stop-color="#CB8F66"/><stop offset="1" stop-color="#B57651"/></linearGradient>
+              <radialGradient id="faceG" cx="42%" cy="42%" r="68%"><stop offset="0" stop-color="#D3986F"/><stop offset=".7" stop-color="#C4875F"/><stop offset="1" stop-color="#AE714C"/></radialGradient>
+              <linearGradient id="fadeG2" x1="0" y1="0" x2="0" y2="1"><stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <mask id="fade2" maskUnits="userSpaceOnUse" x="-200" y="-100" width="820" height="550"><rect x="-200" y="-100" width="820" height="550" fill="url(#fadeG2)"/></mask>
+              <clipPath id="eyeClip">
+                <path d="M186.5 163.5 C189 159 199 159 201.5 163 C199 166.5 189 167 186.5 163.5 Z"/>
+                <path d="M218.5 163 C221 159 231 159 233.5 163.5 C231 167 221 166.5 218.5 163 Z"/>
+              </clipPath>
             </defs>
-
-            <!-- backdrop -->
-            <circle class="ring" cx="210" cy="250" r="194" fill="none" stroke="#E3C27E" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/>
-            <circle cx="210" cy="250" r="176" fill="url(#bgGlow)"/>
-            <circle cx="210" cy="250" r="176" fill="none" stroke="#4FE0A6" stroke-opacity=".25"/>
-
-            <g clip-path="url(#disc)" mask="url(#fade)">
-              <!-- the person -->
-              <g transform="translate(0 -14)"><g class="person">
-                <!-- anime style: lean, toned build in a black collared shirt -->
-                <path d="M86 520 C88 440 100 388 138 366 C162 353 186 348 210 348 C234 348 258 353 282 366 C320 388 332 440 334 520 Z" fill="url(#hoodie)" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M88 480 C92 426 106 388 138 366 C162 353 186 348 210 348" fill="none" stroke="#4FE0A6" stroke-opacity=".55" stroke-width="2.5"/>
-                <path d="M164 400 C184 410 200 408 210 400 M256 400 C236 410 220 408 210 400" stroke="#000" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".45"/>
-                <!-- neck -->
-                <path d="M191 286 L189 356 L231 356 L229 286 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M190 316 C200 334 220 334 230 316 L231 342 C216 336 204 336 189 342 Z" fill="#9A5F3D"/>
-                <path d="M196 344 C202 348 206 349 210 350 C214 349 218 348 224 344" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <!-- open collar -->
-                <path d="M192 350 L210 392 L228 350 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M201 360 L210 382" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
-                <path d="M172 346 C180 340 188 340 192 346 L210 394 L184 382 L164 362 Z" fill="#1E2C25" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M248 346 C240 340 232 340 228 346 L210 394 L236 382 L256 362 Z" fill="#1E2C25" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M210 394 L210 520" stroke="#2A3B32" stroke-width="2"/>
-                <circle cx="214" cy="406" r="2.8" fill="#3A5044"/>
-
-                <!-- shoulders and rolled sleeves -->
-                <path d="M98 410 C94 378 114 360 142 360 L154 436 C126 446 102 438 98 410 Z" fill="#1F2E26" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M322 410 C326 378 306 360 278 360 L266 436 C294 446 318 438 322 410 Z" fill="#1F2E26" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M100 404 C102 380 116 366 138 362" stroke="#4FE0A6" stroke-opacity=".5" stroke-width="2" fill="none"/>
-                <path d="M102 424 C118 436 138 438 154 432 L153 446 C134 452 112 448 103 438 Z" fill="#2A3D33" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M318 424 C302 436 282 438 266 432 L267 446 C286 452 308 448 317 438 Z" fill="#2A3D33" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-
-                <!-- crossed forearms -->
-                <g class="arms">
-                  <rect x="120" y="409" width="180" height="32" rx="16" fill="#9A5F3D" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round" transform="rotate(-7 210 425)"/>
-                  <g transform="rotate(-12 124 404)">
-                    <rect x="109" y="391" width="31" height="29" rx="13" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                    <path d="M114 399 h19 M114 405.5 h21 M114 412 h17" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
+            <g mask="url(#fade2)"><g class="person">
+              <!-- collar stand behind the neck -->
+              <path d="M182 248 C190 236 230 236 238 248 L232 254 C224 244 196 244 188 254 Z" fill="#2B3330"/>
+              <!-- neck -->
+              <path d="M187 194 L185 258 L235 258 L233 194 Z" fill="#C4875F"/>
+              <path d="M186.5 202 C198 222 222 222 233.5 202 L234 232 C218 225 202 225 186 232 Z" fill="#A26845"/>
+              <!-- right arm, relaxed -->
+              <g class="arm-r">
+                <path d="M311 364 C311 359 281 359 281 364 C280 390 282 420 285 452 C287 458 305 458 307 452 C310 420 312 390 311 364 Z" fill="url(#armG)"/>
+                <path d="M318 288 C320 268 306 257 292 258 C278 259 272 272 273 290 L277 362 C278 370 286 374 296 374 C306 374 314 370 315 362 Z" fill="url(#sleeveG)"/>
+                <path d="M310 300 C306 320 304 340 306 356" stroke="#0B0F0E" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>
+                <rect x="274" y="352" width="44" height="21" rx="8" fill="#2B3330"/>
+                <path d="M277 362.5 h38" stroke="#3E4844" stroke-width="1.3"/>
+              </g>
+              <!-- left arm, waves -->
+              <g class="arm-l">
+                <g class="fore">
+                  <path d="M109 364 C109 359 139 359 139 364 C140 390 138 420 135 452 C133 458 115 458 113 452 C110 420 108 390 109 364 Z" fill="url(#armG)"/>
+                  <path d="M118 384 C116 404 116 424 117 442" stroke="#DBA47D" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+                  <rect x="104" y="447" width="7" height="18" rx="3.5" fill="#A26845" transform="rotate(28 108 452)"/>
+                  <rect x="112" y="446" width="24" height="28" rx="9" fill="#C4875F"/>
+                  <g fill="#C4875F" stroke="#A26845" stroke-width=".8">
+                    <rect x="112.2" y="464" width="5.6" height="16" rx="2.8"/>
+                    <rect x="118.2" y="464" width="5.6" height="21" rx="2.8"/>
+                    <rect x="124.2" y="464" width="5.6" height="22" rx="2.8"/>
+                    <rect x="130.2" y="464" width="5.6" height="19" rx="2.8"/>
                   </g>
-                  <rect x="114" y="431" width="192" height="34" rx="17" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round" transform="rotate(6 210 448)"/>
-                  <path d="M136 455 C180 459 234 465 284 469" stroke="#9A5F3D" stroke-width="5" stroke-linecap="round" fill="none" opacity=".8"/>
-                  <path d="M138 438 C182 440 232 446 282 452" stroke="#DDA67D" stroke-width="3" stroke-linecap="round" fill="none"/>
-                  <path d="M170 444 C186 446 196 446 206 448" stroke="#9A5F3D" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".7"/>
-                  <g transform="rotate(14 298 440)">
-                    <rect x="288" y="423" width="31" height="31" rx="14" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                    <path d="M294 431 h19 M294 437.5 h21 M294 444 h17" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
-                  </g>
-                  <rect x="270" y="435" width="13" height="19" rx="4" fill="#0B2A1F" transform="rotate(6 210 448)"/>
-                  <rect x="272.5" y="438" width="8" height="13" rx="2" fill="#C6F06A" transform="rotate(6 210 448)"/>
                 </g>
+                <path d="M102 288 C100 268 114 257 128 258 C142 259 148 272 147 290 L143 362 C142 370 134 374 124 374 C114 374 106 370 105 362 Z" fill="url(#sleeveG)"/>
+                <path d="M110 300 C114 320 116 340 114 356" stroke="#0B0F0E" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>
+                <rect x="102" y="352" width="44" height="21" rx="8" fill="#2B3330"/>
+                <path d="M105 362.5 h38" stroke="#3E4844" stroke-width="1.3"/>
+              </g>
 
-                <!-- head (moves with the cursor) -->
-                <g transform="translate(-21 6) scale(1.1)"><g class="head" id="head">
-                  <!-- back hair mass -->
-                  <path d="M160 214 C150 182 154 150 176 134 C190 122 212 116 234 120 C260 126 278 150 274 182 C272 196 268 206 262 214 L254 200 L166 200 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                  <!-- volume on top: swept-up quiff -->
-                  <path d="M160 174 C154 152 164 132 184 126 C194 110 222 106 240 114 C258 112 276 126 276 146 C282 158 280 170 272 178 C266 162 248 150 228 146 C204 142 178 152 160 174 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M234 116 C248 102 268 100 282 110 C268 112 258 118 252 126 Z M200 118 C208 104 226 96 242 98 C230 104 222 110 218 118 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M190 132 C204 120 222 118 236 122 M246 124 C258 126 268 134 270 146" stroke="#3A3F4C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                  <!-- ears -->
-                  <path d="M164 220 C154 216 152 236 158 244 C162 248 166 246 167 242 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M256 220 C266 216 268 236 262 244 C258 248 254 246 253 242 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                  <!-- face: anime oval with a tapered chin -->
-                  <path d="M164 206 C164 172 184 152 210 152 C236 152 256 172 256 206 C256 234 250 254 239 268 L222 286 C216 292 204 292 198 286 L181 268 C170 254 164 234 164 206 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M256 210 C255 236 249 256 238 269 L222 286 C230 270 240 252 243 222 Z" fill="#9A5F3D" opacity=".85"/>
-                  <!-- stubble on the chin and jaw -->
-                  <path d="M186 272 C194 284 202 290 210 290 C218 290 226 284 234 272 C228 286 220 294 210 294 C200 294 192 286 186 272 Z" fill="#2A1A12" opacity=".45"/>
-                  <path d="M203 280 C206 285 214 285 217 280 C214 283 206 283 203 280 Z" fill="#2A1A12" opacity=".55"/>
-                  <!-- swept-up front hair -->
-                  <path d="M166 206 C158 180 166 156 182 146 C180 130 196 118 212 124 C220 110 244 112 250 128 C266 132 272 150 264 162 C264 182 260 196 254 204 C248 190 240 180 228 174 C222 182 210 182 204 174 C196 180 188 184 182 188 C174 192 168 198 166 206 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M176 150 C172 138 180 126 192 124 C186 132 184 140 186 148 Z M206 126 C210 114 224 110 234 116 C224 118 216 122 212 130 Z M240 124 C252 122 262 130 262 142 C256 134 248 130 242 132 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
-                  <path d="M188 160 C194 144 210 136 228 138 M206 150 C216 138 236 134 250 144 M230 160 C242 152 254 154 260 164" stroke="#3A3F4C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                  <path d="M248 156 C256 168 258 184 256 196" stroke="#4FE0A6" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".75"/>
-                  <path d="M166 204 C164 192 166 180 172 172 L172 210 Z M254 204 C256 192 254 180 248 172 L248 210 Z" fill="#120C09"/>
-                  <!-- brows: thick and straight, like the photo -->
-                  <g class="brows" id="brows">
-                    <path d="M174 205 C184 200 196 200 204 203" stroke="#120C09" stroke-width="4.2" stroke-linecap="round" fill="none"/>
-                    <path d="M216 203 C224 200 236 200 246 205" stroke="#120C09" stroke-width="4.2" stroke-linecap="round" fill="none"/>
-                  </g>
-                  <!-- anime eyes -->
-                  <g class="eyes" id="eyes">
-                    <path d="M174 224 C178 213 198 211 204 222 C200 231 181 233 174 224 Z" fill="#F6FBF7"/>
-                    <path d="M216 222 C222 211 242 213 246 224 C239 233 220 231 216 222 Z" fill="#F6FBF7"/>
-                    <g id="pupils">
-                      <ellipse cx="189.5" cy="223" rx="6.6" ry="8" fill="url(#iris)"/>
-                      <ellipse cx="230.5" cy="223" rx="6.6" ry="8" fill="url(#iris)"/>
-                      <circle cx="189.5" cy="224" r="3.2" fill="#0C0604"/>
-                      <circle cx="230.5" cy="224" r="3.2" fill="#0C0604"/>
-                      <circle cx="187.2" cy="219.6" r="2.3" fill="#fff"/>
-                      <circle cx="228.2" cy="219.6" r="2.3" fill="#fff"/>
-                      <circle cx="191.8" cy="227.4" r="1" fill="#fff" opacity=".85"/>
-                      <circle cx="232.8" cy="227.4" r="1" fill="#fff" opacity=".85"/>
-                    </g>
-                    <path d="M172 223 C177 210 199 208 205 221" stroke="#0C0604" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <path d="M248 223 C243 210 221 208 215 221" stroke="#0C0604" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <path d="M179 230 C185 233 196 233 202 228 M218 228 C224 233 235 233 241 230" stroke="#7A4A30" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-                  </g>
-                  <!-- nose -->
-                  <path d="M211 236 L208 249 L213 250" stroke="#83502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                  <!-- thin moustache -->
-                  <path d="M196 257 C202 253 207 253 210 255 C213 253 218 253 224 257 C218 257 214 258 210 258.5 C206 258 202 257 196 257 Z" fill="#120C09"/>
-                  <!-- mouth -->
-                  <path class="mouth-calm" d="M202 265 C206 268 214 268 219 264" stroke="#5A2618" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-                  <path class="mouth-grin" d="M199 262 C204 275 216 275 221 262 Z" fill="#6B2B22" stroke="#2A1810" stroke-width="1.6" stroke-linejoin="round"/>
-                  <path class="mouth-grin" d="M201 263 L219 263 L218 265.6 L202 265.6 Z" fill="#F6FBF7"/>
-                  <!-- blush -->
-                  <g class="cheek" opacity="0" stroke="#E0786B" stroke-width="1.8" stroke-linecap="round">
-                    <path d="M176 246 l4 -6 M182 246 l4 -6 M188 246 l4 -6"/>
-                    <path d="M230 246 l4 -6 M236 246 l4 -6 M242 246 l4 -6"/>
-                  </g>
-                </g></g>
+              <!-- torso: black collared shirt -->
+              <path d="M122 272 C146 256 182 248 210 248 C238 248 274 256 298 272 C314 282 320 298 318 318 C316 328 306 336 290 337 C292 360 292 380 292 400 L296 450 L124 450 L128 400 C128 380 128 360 130 337 C114 336 104 328 102 318 C100 298 106 282 122 272 Z" fill="url(#shirtG)"/>
+              <path d="M298 272 C314 282 320 298 318 318" stroke="#4FE0A6" stroke-opacity=".42" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M122 272 C106 282 100 298 102 318" stroke="#E3C27E" stroke-opacity=".25" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M136 300 C134 316 132 328 130 337 M284 300 C286 316 288 328 290 337" stroke="#0B0F0E" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".55"/>
+              <path d="M150 340 C172 354 196 354 206 346 M270 340 C248 354 224 354 214 346" stroke="#000" stroke-opacity=".4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <!-- open collar -->
+              <path d="M187 242 L210 280 L233 242 Z" fill="#C4875F"/>
+              <path d="M203 258 L210 272 L217 258" stroke="#A26845" stroke-width="1.6" fill="none" stroke-linejoin="round" opacity=".7"/>
+              <path d="M182 248 C189 245 195 246 198 251 L210 280 L189 270 L173 258 Z" fill="#2B3330" stroke="#3E4844" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M238 248 C231 245 225 246 222 251 L210 280 L231 270 L247 258 Z" fill="#2B3330" stroke="#3E4844" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M210 280 L210 450" stroke="#2F3734" stroke-width="2"/>
+              <circle cx="214" cy="304" r="2.6" fill="#3E4844"/><circle cx="214" cy="348" r="2.6" fill="#3E4844"/><circle cx="214" cy="392" r="2.6" fill="#3E4844"/>
+
+              <!-- head (follows the cursor) -->
+              <g transform="translate(-21 -17) scale(1.1)"><g id="head">
+                <path d="M164 166 C154 122 172 82 212 78 C252 78 270 120 258 166 L250 142 L172 142 Z" fill="#140E0B"/>
+                <path d="M172 156 C163 152 160 172 165 184 C168 190 173 188 174 184 Z" fill="#B57651"/>
+                <path d="M248 156 C257 152 260 172 255 184 C252 190 247 188 246 184 Z" fill="#B57651"/>
+                <path d="M168 164 C166 170 167 178 170 182 M252 164 C254 170 253 178 250 182" stroke="#8A5233" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+                <path d="M172 150 C172 120 188 106 210 106 C232 106 248 120 248 150 C248 176 244 196 235 208 C228 218 219 224 210 224 C201 224 192 218 185 208 C176 196 172 176 172 150 Z" fill="url(#faceG)"/>
+                <path d="M248 152 C248 176 244 196 235 208 C228 218 219 224 210 224 C222 214 232 200 236 180 C238 168 240 158 238 148 Z" fill="#8A5233" opacity=".28"/>
+                <!-- short beard along the jaw -->
+                <path d="M174 174 C176 198 190 224 210 226 C230 224 244 198 246 174 C242 192 236 202 228 207 C222 215 198 215 192 207 C184 202 178 192 174 174 Z" fill="#24160F" opacity=".42"/>
+                <path d="M199 197.5 C197 201 197 204 198.5 207.5 M221 197.5 C223 201 223 204 221.5 207.5" stroke="#24160F" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".3"/>
+                <!-- eyes -->
+                <g id="eyes">
+                  <path d="M186.5 163.5 C189 159 199 159 201.5 163 C199 166.5 189 167 186.5 163.5 Z" fill="#F3EFE9"/>
+                  <path d="M218.5 163 C221 159 231 159 233.5 163.5 C231 167 221 166.5 218.5 163 Z" fill="#F3EFE9"/>
+                  <g clip-path="url(#eyeClip)"><g id="pupils">
+                    <circle cx="194" cy="163" r="3.9" fill="#3A2010"/><circle cx="226" cy="163" r="3.9" fill="#3A2010"/>
+                    <circle cx="194" cy="163" r="1.9" fill="#0A0503"/><circle cx="226" cy="163" r="1.9" fill="#0A0503"/>
+                    <circle cx="195.3" cy="161.7" r="1" fill="#fff"/><circle cx="227.3" cy="161.7" r="1" fill="#fff"/>
+                  </g></g>
+                  <path d="M185.5 163.2 C188.5 158 199 157.5 202.5 162.5 M234.5 163.2 C231.5 158 221 157.5 217.5 162.5" stroke="#140A06" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                  <path d="M187.5 158.6 C191 155.8 198 155.8 201 158.2 M232.5 158.6 C229 155.8 222 155.8 219 158.2" stroke="#8A5233" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".6"/>
+                  <path d="M188.5 166.4 C192 168.2 198 168 201 165.6 M231.5 166.4 C228 168.2 222 168 219 165.6" stroke="#8A5233" stroke-width="1" fill="none" stroke-linecap="round" opacity=".5"/>
+                </g>
+                <!-- brows -->
+                <g id="brows" fill="#140C08">
+                  <path d="M183.5 153 C189 149.5 197 148.6 203.5 150.6 L203 154.2 C197 152.6 190 153.4 184.5 156.4 Z"/>
+                  <path d="M236.5 153 C231 149.5 223 148.6 216.5 150.6 L217 154.2 C223 152.6 230 153.4 235.5 156.4 Z"/>
+                </g>
+                <!-- nose -->
+                <path d="M213 160 C214 172 216 180 218 186" stroke="#8A5233" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".45"/>
+                <path d="M202.5 188 C206 191.5 214 191.5 217.5 188" stroke="#8A5233" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <!-- moustache -->
+                <path d="M198 196.8 C203 194 207 193.6 210 195 C213 193.6 217 194 222 196.8 C217 197.4 213 197.8 210 198.2 C207 197.8 203 197.4 198 196.8 Z" fill="#1E130D" opacity=".85"/>
+                <!-- mouth -->
+                <g class="mouth-calm">
+                  <path d="M201 203.6 C206 205.8 214 205.8 219 203.6" stroke="#4A2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="210" cy="208" rx="6.5" ry="2.2" fill="#9C5A44" opacity=".7"/>
+                </g>
+                <g class="mouth-grin">
+                  <path d="M199.5 202 C204 212 216 212 220.5 202 Z" fill="#5A2418"/>
+                  <path d="M201.5 203 L218.5 203 L217.6 205.8 L202.4 205.8 Z" fill="#F7F3EE"/>
+                </g>
+                <g class="blush" fill="#E0786B"><ellipse cx="184" cy="184" rx="8" ry="4.5"/><ellipse cx="236" cy="184" rx="8" ry="4.5"/></g>
+                <!-- hair: full, swept up and back -->
+                <path d="M168 152 C158 132 160 106 174 92 C180 80 194 72 206 74 C214 66 230 66 240 74 C254 74 266 86 266 100 C274 112 270 132 254 150 C250 134 240 124 226 120 C210 116 194 120 184 128 C176 134 171 142 168 152 Z" fill="#140E0B"/>
+                <path d="M176 98 C182 84 196 76 208 78 C216 72 230 72 238 78 C250 80 258 88 260 98 C250 90 236 86 222 87 C206 88 188 92 176 98 Z" fill="#2A1F19"/>
+                <path d="M182 118 C186 102 200 92 216 90 M196 122 C204 106 222 98 240 100 M214 118 C226 108 244 106 256 114 M178 132 C180 124 184 118 190 112" stroke="#3B2E26" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                <path d="M168 152 C167 160 168 168 171 174 L175 174 L176 144 Z M252 150 C253 158 252 166 249 172 L245 172 L244 142 Z" fill="#140E0B" opacity=".85"/>
               </g></g>
-            </g>
-
-            <!-- floating badges -->
-            <g class="badge b1"><rect x="20" y="96" width="86" height="40" rx="20" fill="#0B1D16" stroke="#4FE0A6" stroke-opacity=".6"/><text x="63" y="122" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#A7F3CF">&lt;/&gt; API</text></g>
-            <g class="badge b2"><rect x="318" y="72" width="80" height="40" rx="20" fill="#0B1D16" stroke="#E3C27E" stroke-opacity=".7"/><text x="358" y="98" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#E3C27E">✦ AI</text></g>
-            <g class="badge b3"><rect x="326" y="318" width="84" height="40" rx="20" fill="#0B1D16" stroke="#38B6C1" stroke-opacity=".7"/><text x="368" y="344" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#7FDDE5">{ SQL }</text></g>
-            <g class="badge b4"><rect x="8" y="330" width="86" height="40" rx="20" fill="#0B1D16" stroke="#C6F06A" stroke-opacity=".6"/><text x="51" y="356" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#C6F06A">✓ CI</text></g>
+            </g></g>
           </svg>
         </button>
-        <p class="buddy-hint" aria-hidden="true">Move your cursor — tap him to chat</p>
+      </div>
+
+      <div class="hero-side seq" style="--d:.78s">
+        <ul class="facts">
+          <li><strong>7</strong><span>projects on GitHub</span></li>
+          <li><strong>3</strong><span>roles</span></li>
+          <li><strong>4</strong><span>certifications</span></li>
+          <li><strong>2025</strong><span>B.Tech CSE</span></li>
+        </ul>
+        <p class="hint" id="hint">👋 Hover over me to say hi, or tap for more.</p>
       </div>
     </div>
   </section>
@@ -1037,59 +1026,67 @@
   }), {rootMargin:'0px 0px -8% 0px'}) : null;
   document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
-  // hero character: follows the cursor, blinks, reacts to taps
+  // hero figure: follows the cursor, blinks, waves and chats
   (function(){
-    const buddy = document.querySelector('.buddy'), btn = document.getElementById('buddy');
+    const fig = document.getElementById('heroFig'), btn = document.getElementById('person');
     const svg = btn.querySelector('svg'), head = document.getElementById('head');
     const pupils = document.getElementById('pupils'), eyes = document.getElementById('eyes'), brows = document.getElementById('brows');
-    const bubble = document.getElementById('bubble');
+    const bubble = document.getElementById('bubble'), word = document.getElementById('heroWord');
     const LINES = [
-      "Hey! I'm Pradeep 👋",
-      "I build backend services and AI apps.",
-      "My AI agent passes 18/18 evals. Not bad, right?",
-      "Java, TypeScript, Python — pick one.",
+      "Hey there! 👋",
+      "I'm Pradeep — I build backend services and AI apps.",
+      "My AI support agent passes 18/18 evals.",
+      "Java, TypeScript or Python? I'm in.",
       "Open to software, AI/ML and data roles.",
-      "Psst… my resume is one click away ↓",
-      "Scroll down — all 7 projects are there."
+      "My resume is one click away.",
+      "Scroll down to see all 7 projects."
     ];
-    let line = 0, tx = 0, ty = 0, cx = 0, cy = 0, lastMove = 0, idleT = 0;
-    if (!fine) document.querySelector('.buddy-hint').textContent = 'Tap him to chat';
+    let line = 0, tx = 0, ty = 0, cx = 0, cy = 0, lastMove = 0, idleT = 0, waveT = 0, lastWave = 0;
+    if (!fine) document.getElementById('hint').textContent = '👋 Tap me to say hi.';
 
-    function aim(clientX, clientY){
+    function aim(x, y){
       const r = svg.getBoundingClientRect();
-      const hx = r.left + r.width * .5, hy = r.top + r.height * .47;
-      const dx = (clientX - hx) / (innerWidth * .5), dy = (clientY - hy) / (innerHeight * .5);
-      tx = Math.max(-1, Math.min(1, dx)); ty = Math.max(-1, Math.min(1, dy));
+      const hx = r.left + r.width * .5, hy = r.top + r.height * .3;
+      tx = Math.max(-1, Math.min(1, (x - hx) / (innerWidth * .45)));
+      ty = Math.max(-1, Math.min(1, (y - hy) / (innerHeight * .5)));
       lastMove = performance.now();
     }
     addEventListener('pointermove', e => aim(e.clientX, e.clientY), {passive:true});
     addEventListener('pointerdown', e => aim(e.clientX, e.clientY), {passive:true});
 
     function frame(t){
-      if (t - lastMove > 4000 && t > idleT){ // idle: glance somewhere new
-        tx = (Math.random() * 2 - 1) * .7; ty = (Math.random() * 2 - 1) * .4; idleT = t + 1800 + Math.random() * 2200;
+      if (t - lastMove > 4000 && t > idleT){
+        tx = (Math.random() * 2 - 1) * .6; ty = (Math.random() * 2 - 1) * .3; idleT = t + 1800 + Math.random() * 2400;
       }
-      cx += (tx - cx) * .12; cy += (ty - cy) * .12;
-      head.setAttribute('transform', `translate(${cx * 7} ${cy * 3}) rotate(${cx * 4} 210 300)`);
-      pupils.setAttribute('transform', `translate(${cx * 5} ${cy * 3.5})`);
-      brows.style.translate = `${cx * 2}px ${cy * 1.5}px`;
+      cx += (tx - cx) * .1; cy += (ty - cy) * .1;
+      head.setAttribute('transform', `translate(${cx * 3.5} ${cy * 2.5}) rotate(${cx * 5} 210 222)`);
+      pupils.setAttribute('transform', `translate(${cx * 2.6} ${cy * 1.3})`);
+      brows.style.translate = `${cx * 1.2}px ${cy * .8}px`;
+      word.style.setProperty('--px', (-cx * 16).toFixed(1) + 'px');
       requestAnimationFrame(frame);
     }
     if (!reduced) requestAnimationFrame(frame);
 
     (function blink(){
       if (!reduced){ eyes.classList.add('blink'); setTimeout(() => eyes.classList.remove('blink'), 130); }
-      setTimeout(blink, 2600 + Math.random() * 3200);
+      setTimeout(blink, 2600 + Math.random() * 3400);
     })();
 
-    let happyT;
+    function wave(){
+      lastWave = performance.now();
+      fig.classList.add('happy');
+      if (!reduced){ fig.classList.remove('waving'); void fig.offsetWidth; fig.classList.add('waving'); }
+      clearTimeout(waveT);
+      waveT = setTimeout(() => fig.classList.remove('waving', 'happy'), 2500);
+    }
+    btn.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && performance.now() - lastWave > 3000) wave(); });
     btn.addEventListener('click', () => {
       line = (line + 1) % LINES.length;
       bubble.textContent = LINES[line];
       bubble.classList.remove('pop'); void bubble.offsetWidth; bubble.classList.add('pop');
-      buddy.classList.remove('hop'); void buddy.offsetWidth; buddy.classList.add('hop', 'happy');
-      clearTimeout(happyT); happyT = setTimeout(() => buddy.classList.remove('happy'), 1600);
+      wave();
     });
+    setTimeout(wave, 1300);
   })();
 
   // hero trace
