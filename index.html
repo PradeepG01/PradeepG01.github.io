@@ -256,9 +256,31 @@
   .js .reveal.in{opacity:1; transform:none;}
 
   /* ---------- about ---------- */
-  .about{display:grid; grid-template-columns:1.25fr 1fr; gap:60px; align-items:start;}
+  .about{display:grid; grid-template-columns:minmax(0,360px) 1fr; grid-template-areas:"pic text" "pic card"; gap:28px 56px; align-items:start;}
+  .about-text{grid-area:text;} .portrait{grid-area:pic;} .about-card{grid-area:card;}
   .about-text p{color:var(--muted); font-size:17.5px; margin-bottom:18px; max-width:36em;}
   .about-text p strong{color:var(--text); font-weight:600;}
+  .about-side{display:contents;}
+  .portrait{
+    position:relative; margin:0; border-radius:24px; overflow:hidden; isolation:isolate;
+    background:
+      radial-gradient(80% 60% at 50% 30%, rgba(79,224,166,.35), transparent 70%),
+      radial-gradient(120% 90% at 50% 0%, #1F6B4C 0%, #0F3527 55%, #0A2219 100%);
+    border:1px solid var(--line-2);
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .portrait::before{
+    content:""; position:absolute; inset:14px; border-radius:18px; z-index:-1;
+    border:1px dashed rgba(227,194,126,.45);
+  }
+  .portrait::after{content:""; position:absolute; top:-1px; left:24px; right:24px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .portrait img{display:block; width:100%; height:auto; margin-top:22px; filter:drop-shadow(0 20px 30px rgba(0,0,0,.45));}
+  .portrait figcaption{
+    position:absolute; left:12px; right:12px; bottom:12px; display:flex; align-items:center; gap:9px; justify-content:center;
+    font-size:13px; font-weight:600; color:var(--text);
+    background:rgba(6,18,13,.72); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border:1px solid var(--line-2); border-radius:999px; padding:8px 12px; white-space:nowrap;
+  }
   .about-card{
     position:relative; border-radius:24px; padding:10px 26px;
     background:linear-gradient(165deg,rgba(26,58,45,.6),rgba(11,29,22,.75)); border:1px solid var(--line-2);
@@ -403,7 +425,7 @@
     .hero-grid{grid-template-columns:1fr; gap:48px;}
     .buddy{max-width:460px; margin:0 auto; width:100%;}
     .demo-grid{grid-template-columns:1fr; gap:36px;}
-    .about{grid-template-columns:1fr; gap:36px;}
+    .about{grid-template-columns:minmax(0,300px) 1fr; grid-template-areas:"pic text" "card card"; gap:32px 40px;}
     .plist{grid-template-columns:1fr 1fr;}
     .proj, .proj.feat{grid-column:span 1;}
     .skills{grid-template-columns:1fr 1fr;}
@@ -437,6 +459,8 @@
     .sk.wide{grid-column:auto;}
     .cta{padding:56px 22px; border-radius:24px;}
     .clist li{flex-direction:column; gap:4px;}
+    .about{grid-template-columns:1fr; grid-template-areas:"pic" "text" "card";}
+    .portrait{max-width:340px; width:100%; margin:0 auto;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -504,7 +528,7 @@
                 <stop offset="0" stop-color="#1F6B4C"/><stop offset=".65" stop-color="#0F3527"/><stop offset="1" stop-color="#0A2219"/>
               </radialGradient>
               <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#1F9E6C"/><stop offset="1" stop-color="#0E5C3F"/>
+                <stop offset="0" stop-color="#22342B"/><stop offset="1" stop-color="#111B16"/>
               </linearGradient>
               <linearGradient id="sleeveBack" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#1A925F"/><stop offset="1" stop-color="#106B48"/>
@@ -527,37 +551,44 @@
             <g clip-path="url(#disc)" mask="url(#fade)">
               <!-- the person -->
               <g transform="translate(0 -14)"><g class="person">
-                <!-- torso: athletic V-taper in a fitted tee -->
-                <path d="M54 520 C56 432 76 374 138 356 C168 348 190 345 210 345 C230 345 252 348 282 356 C344 374 364 432 366 520 Z" fill="url(#hoodie)"/>
-                <path d="M150 396 C176 412 200 410 210 402 M270 396 C244 412 220 410 210 402" stroke="#0A3726" stroke-width="3" stroke-linecap="round" fill="none" opacity=".45"/>
-                <!-- neck and traps -->
-                <path d="M150 362 C172 344 186 330 186 300 L234 300 C234 330 248 344 270 362 C250 368 170 368 150 362 Z" fill="#A8673F"/>
-                <rect x="184" y="292" width="52" height="62" rx="20" fill="#B5734D"/>
-                <path d="M184 318 C198 332 222 332 236 318 L236 302 L184 302 Z" fill="#8F5537" opacity=".75"/>
-                <!-- crew neck -->
-                <path d="M174 352 C186 374 234 374 246 352 L238 350 C226 366 194 366 182 350 Z" fill="#0A3726"/>
+                <!-- torso: black collared shirt, fit build -->
+                <path d="M58 520 C60 432 80 376 140 358 C170 350 190 347 210 347 C230 347 250 350 280 358 C340 376 360 432 362 520 Z" fill="url(#hoodie)"/>
+                <path d="M60 470 C64 420 84 376 140 358 C170 350 190 347 210 347 C230 347 250 350 280 358 C336 376 356 420 360 470" fill="none" stroke="#4FE0A6" stroke-opacity=".45" stroke-width="2.5"/>
+                <path d="M152 398 C176 412 200 410 210 404 M268 398 C244 412 220 410 210 404" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none" opacity=".35"/>
+                <!-- neck -->
+                <path d="M156 362 C176 346 188 334 188 302 L232 302 C232 334 244 346 264 362 C244 368 176 368 156 362 Z" fill="#9A5F3D"/>
+                <rect x="186" y="292" width="48" height="62" rx="20" fill="#B97C55"/>
+                <path d="M186 318 C200 332 220 332 234 318 L234 302 L186 302 Z" fill="#7E4A2E" opacity=".7"/>
+                <!-- open collar showing a V of skin -->
+                <path d="M188 346 L210 392 L232 346 Z" fill="#B97C55"/>
+                <path d="M196 352 L210 384 L224 352" stroke="#7E4A2E" stroke-width="2" fill="none" opacity=".5"/>
+                <path d="M170 344 C178 340 186 340 190 344 L210 394 L182 378 L160 360 Z" fill="#1E2C25"/>
+                <path d="M250 344 C242 340 234 340 230 344 L210 394 L238 378 L260 360 Z" fill="#1E2C25"/>
+                <path d="M170 344 L210 394 M250 344 L210 394" stroke="#2F4438" stroke-width="2" fill="none"/>
+                <!-- placket + buttons -->
+                <path d="M210 394 L210 520" stroke="#2A3B32" stroke-width="2"/>
+                <circle cx="214" cy="404" r="3" fill="#33473C"/>
 
-                <!-- shoulders and biceps in short sleeves -->
-                <path d="M78 404 C72 368 100 350 138 354 L152 438 C116 452 84 440 78 404 Z" fill="#1A8A5C"/>
-                <path d="M342 404 C348 368 320 350 282 354 L268 438 C304 452 336 440 342 404 Z" fill="#1A8A5C"/>
-                <path d="M84 424 C100 434 128 436 150 430" stroke="#0A3726" stroke-width="4" stroke-linecap="round" fill="none" opacity=".6"/>
-                <path d="M336 424 C320 434 292 436 270 430" stroke="#0A3726" stroke-width="4" stroke-linecap="round" fill="none" opacity=".6"/>
-                <path d="M86 428 C90 452 116 466 146 460 L150 432 C124 438 102 436 86 428 Z" fill="#B5734D"/>
-                <path d="M334 428 C330 452 304 466 274 460 L270 432 C296 438 318 436 334 428 Z" fill="#B5734D"/>
+                <!-- shoulders and upper arms in black sleeves -->
+                <path d="M80 406 C74 370 102 352 140 356 L154 440 C118 454 86 442 80 406 Z" fill="#1F2E26" stroke="#4FE0A6" stroke-opacity=".35" stroke-width="2"/>
+                <path d="M340 406 C346 370 318 352 280 356 L266 440 C302 454 334 442 340 406 Z" fill="#1F2E26" stroke="#4FE0A6" stroke-opacity=".35" stroke-width="2"/>
+                <!-- rolled cuffs -->
+                <path d="M86 426 C104 438 130 440 152 434 L150 448 C126 454 100 450 88 440 Z" fill="#26372E"/>
+                <path d="M334 426 C316 438 290 440 268 434 L270 448 C294 454 320 450 332 440 Z" fill="#26372E"/>
 
-                <!-- crossed bare forearms -->
+                <!-- crossed forearms -->
                 <g class="arms">
-                  <rect x="108" y="406" width="204" height="38" rx="19" fill="#A3623C" transform="rotate(-7 210 425)"/>
+                  <rect x="108" y="406" width="204" height="38" rx="19" fill="#9A5F3D" transform="rotate(-7 210 425)"/>
                   <g transform="rotate(-12 122 404)">
-                    <rect x="102" y="386" width="38" height="36" rx="16" fill="#B5734D"/>
-                    <path d="M108 395 h24 M108 403 h26 M108 411 h22" stroke="#8F5537" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                    <rect x="102" y="386" width="38" height="36" rx="16" fill="#B97C55"/>
+                    <path d="M108 395 h24 M108 403 h26 M108 411 h22" stroke="#7E4A2E" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
                   </g>
-                  <rect x="104" y="428" width="212" height="42" rx="21" fill="#C07D55" transform="rotate(6 210 450)"/>
-                  <path d="M126 436 C170 438 230 444 296 452" stroke="#D69A72" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>
-                  <path d="M150 460 C190 463 236 467 276 470" stroke="#8F5537" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".35"/>
+                  <rect x="104" y="428" width="212" height="42" rx="21" fill="#B97C55" transform="rotate(6 210 450)"/>
+                  <path d="M126 436 C170 438 230 444 296 452" stroke="#CC9068" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>
+                  <path d="M150 460 C190 463 236 467 276 470" stroke="#7E4A2E" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".35"/>
                   <g transform="rotate(14 302 440)">
-                    <rect x="292" y="418" width="38" height="38" rx="17" fill="#B5734D"/>
-                    <path d="M300 427 h22 M300 435 h24 M300 443 h20" stroke="#8F5537" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                    <rect x="292" y="418" width="38" height="38" rx="17" fill="#B97C55"/>
+                    <path d="M300 427 h22 M300 435 h24 M300 443 h20" stroke="#7E4A2E" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
                   </g>
                   <rect x="272" y="430" width="15" height="24" rx="5" fill="#0B2A1F" transform="rotate(6 210 450)"/>
                   <rect x="275" y="434" width="9" height="16" rx="2.5" fill="#C6F06A" transform="rotate(6 210 450)"/>
@@ -565,44 +596,47 @@
 
                 <!-- head (moves with the cursor) -->
                 <g transform="translate(0 10)"><g class="head" id="head">
-                  <ellipse cx="152" cy="246" rx="12" ry="18" fill="#A8673F"/>
-                  <ellipse cx="268" cy="246" rx="12" ry="18" fill="#A8673F"/>
-                  <path d="M152 232 C152 182 176 156 210 156 C244 156 268 182 268 232 C268 270 256 296 236 310 C224 318 196 318 184 310 C164 296 152 270 152 232 Z" fill="#B97850"/>
-                  <!-- cheekbone light -->
-                  <path d="M166 252 C172 262 180 266 188 266 M254 252 C248 262 240 266 232 266" stroke="#CF9068" stroke-width="5" stroke-linecap="round" fill="none" opacity=".6"/>
-                  <!-- short beard -->
-                  <path d="M154 246 C156 286 176 318 210 320 C244 318 264 286 266 246 C262 268 254 286 244 296 C236 304 226 306 224 300 C222 312 198 312 196 300 C194 306 184 304 176 296 C166 286 158 268 154 246 Z" fill="#24160F" opacity=".72"/>
-                  <path d="M190 277 C200 271 220 271 230 277 C222 281 198 281 190 277 Z" fill="#24160F" opacity=".85"/>
-                  <!-- hair: fade sides, textured top -->
-                  <path d="M150 230 C144 184 168 148 212 146 C256 144 278 178 272 228 C268 208 262 196 254 190 C242 178 216 174 194 180 C176 186 160 200 150 230 Z" fill="#1A120D"/>
-                  <path d="M166 180 C178 136 240 124 266 162 C252 148 226 142 204 148 C188 154 176 164 166 180 Z" fill="#2E2118"/>
-                  <path d="M152 214 C150 200 154 190 160 184 L162 222 Z M268 214 C270 200 266 190 260 184 L258 222 Z" fill="#3A2A20" opacity=".7"/>
-                  <!-- brows -->
+                  <ellipse cx="153" cy="244" rx="11" ry="18" fill="#9A5F3D"/>
+                  <ellipse cx="267" cy="244" rx="11" ry="18" fill="#9A5F3D"/>
+                  <!-- oval face, slightly pointed chin -->
+                  <path d="M154 226 C154 180 178 160 210 160 C242 160 266 180 266 226 C266 268 254 298 232 314 C220 322 200 322 188 314 C166 298 154 268 154 226 Z" fill="#B97C55"/>
+                  <path d="M168 250 C174 262 182 266 190 266 M252 250 C246 262 238 266 230 266" stroke="#CC9068" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55"/>
+                  <!-- light stubble along the jaw and chin -->
+                  <path d="M156 252 C160 290 180 320 210 322 C240 320 260 290 264 252 C260 276 252 294 240 302 C234 306 226 306 222 300 C218 312 202 312 198 300 C194 306 186 306 180 302 C168 294 160 276 156 252 Z" fill="#2A1A12" opacity=".5"/>
+                  <path d="M198 302 C202 314 218 314 222 302 C218 306 202 306 198 302 Z" fill="#2A1A12" opacity=".45"/>
+                  <!-- thin moustache -->
+                  <path d="M190 279 C198 272 206 272 210 275 C214 272 222 272 230 279 C222 278 214 279 210 280 C206 279 198 278 190 279 Z" fill="#120C09"/>
+                  <!-- hair: thick, voluminous, swept up with waves -->
+                  <path d="M150 234 C141 198 144 170 158 152 C166 132 186 120 210 122 C224 114 248 116 262 128 C280 140 286 164 280 188 C280 204 276 220 270 234 C266 212 262 200 256 194 C250 184 236 178 222 180 C204 178 186 182 174 188 C162 198 156 214 150 234 Z" fill="#120C09"/>
+                  <path d="M162 160 C170 136 198 122 224 126 C208 132 196 142 190 156 C184 146 172 150 162 160 Z" fill="#2A1C15"/>
+                  <path d="M198 146 C208 128 238 122 256 136 C242 136 230 140 224 152 C218 142 206 142 198 146 Z" fill="#2A1C15"/>
+                  <path d="M236 152 C252 140 276 150 278 176 C268 162 254 158 242 164 Z" fill="#2A1C15"/><path d="M174 172 C190 160 212 160 228 166" stroke="#2A1C15" stroke-width="5" stroke-linecap="round" fill="none"/>
+                  <path d="M154 216 C152 204 155 194 160 188 L162 224 Z M266 216 C268 204 265 194 260 188 L258 224 Z" fill="#2E211A" opacity=".75"/>
+                  <!-- brows: thick, straight -->
                   <g class="brows" id="brows">
-                    <path d="M166 214 C178 206 194 206 203 211" stroke="#1A120D" stroke-width="7" stroke-linecap="round" fill="none"/>
-                    <path d="M217 211 C226 206 242 206 254 214" stroke="#1A120D" stroke-width="7" stroke-linecap="round" fill="none"/>
+                    <path d="M168 214 C178 209 192 208 202 211" stroke="#120C09" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+                    <path d="M218 211 C228 208 242 209 252 214" stroke="#120C09" stroke-width="6.5" stroke-linecap="round" fill="none"/>
                   </g>
                   <!-- eyes -->
                   <g class="eyes" id="eyes">
-                    <ellipse cx="185" cy="234" rx="10.5" ry="7" fill="#F6FBF7"/>
-                    <ellipse cx="235" cy="234" rx="10.5" ry="7" fill="#F6FBF7"/>
+                    <ellipse cx="186" cy="234" rx="10.5" ry="6.5" fill="#F6FBF7"/>
+                    <ellipse cx="234" cy="234" rx="10.5" ry="6.5" fill="#F6FBF7"/>
                     <g id="pupils">
-                      <circle cx="185" cy="234" r="5" fill="#1A120D"/>
-                      <circle cx="235" cy="234" r="5" fill="#1A120D"/>
-                      <circle cx="187" cy="232" r="1.7" fill="#fff"/>
-                      <circle cx="237" cy="232" r="1.7" fill="#fff"/>
+                      <circle cx="186" cy="234" r="5.2" fill="#120C09"/>
+                      <circle cx="234" cy="234" r="5.2" fill="#120C09"/>
+                      <circle cx="188" cy="232" r="1.7" fill="#fff"/>
+                      <circle cx="236" cy="232" r="1.7" fill="#fff"/>
                     </g>
                   </g>
-                  <path d="M174 228 C180 224 190 224 196 228 M224 228 C230 224 240 224 246 228" stroke="#5A2E1E" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".7"/>
+                  <path d="M175 229 C181 225 191 225 197 229 M223 229 C229 225 239 225 245 229" stroke="#4A2616" stroke-width="2.8" stroke-linecap="round" fill="none" opacity=".75"/>
                   <!-- nose -->
-                  <path d="M210 240 C205 254 202 261 211 263" stroke="#8F5537" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                  <!-- mouth: confident smirk and big grin -->
-                  <path class="mouth-calm" d="M196 289 C205 294 217 294 226 286" stroke="#3A160C" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                  <path class="mouth-grin" d="M190 285 C200 304 220 304 230 285 Z" fill="#5A2E1E"/>
-                  <path class="mouth-grin" d="M195 287 C205 292 215 292 225 287 L225 290 C215 295 205 295 195 290 Z" fill="#F6FBF7"/>
-                  <!-- cheeks -->
-                  <ellipse class="cheek" cx="170" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
-                  <ellipse class="cheek" cx="250" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
+                  <path d="M210 240 C205 255 202 262 211 264" stroke="#7E4A2E" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                  <!-- mouth: calm smile and big grin -->
+                  <path class="mouth-calm" d="M197 290 C205 295 216 295 224 289" stroke="#4A1E14" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                  <path class="mouth-grin" d="M191 286 C200 304 220 304 229 286 Z" fill="#4A1E14"/>
+                  <path class="mouth-grin" d="M196 288 C205 293 215 293 224 288 L224 291 C215 296 205 296 196 291 Z" fill="#F6FBF7"/>
+                  <ellipse class="cheek" cx="171" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
+                  <ellipse class="cheek" cx="249" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
                 </g></g>
               </g></g>
             </g>
@@ -658,6 +692,11 @@
         <p>Before that, I wrote Python automation at an EdTech startup, then moved into leadership and operations — leading a team that won a 5-year institutional partnership, and running CRM analytics with SQL. That mix taught me to tie engineering work to a metric someone cares about.</p>
         <p>I'm looking for <strong>Software Development, AI/ML or Data</strong> roles where I can own a problem end to end.</p>
       </div>
+      <div class="about-side">
+      <figure class="portrait reveal">
+        <img src="pradeep.webp" width="654" height="818" alt="Portrait of G Pradeep Kumar" loading="lazy" decoding="async">
+        <figcaption><span class="pulse"></span>G Pradeep Kumar · Bengaluru</figcaption>
+      </figure>
       <div class="about-card reveal">
         <dl>
           <div><dt>Based in</dt><dd>Bengaluru, India</dd></div>
@@ -667,6 +706,7 @@
           <div><dt>Speaks</dt><dd>English, Kannada, Telugu, Hindi</dd></div>
           <div><dt>GitHub</dt><dd><a href="https://github.com/PradeepG01" target="_blank" rel="noopener">PradeepG01</a></dd></div>
         </dl>
+      </div>
       </div>
     </div>
   </section>

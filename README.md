@@ -10,7 +10,7 @@ A single-page site in plain HTML, CSS and JavaScript — no framework, no build 
 
 - **Hero** — an interactive illustrated character that follows your cursor and chats when tapped
 - **Demo** — an animated request trace that walks through how my projects process a request
-- **About** — background and quick facts
+- **About** — portrait, background and quick facts
 - **Projects** — all my GitHub repos, filterable and expandable:
   - [ai-support-agent](https://github.com/PradeepG01/ai-support-agent) — LLM support agent with RAG and tool calling
   - [kyc-orchestrator](https://github.com/PradeepG01/kyc-orchestrator) — fintech verification microservice
