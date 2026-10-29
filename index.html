@@ -7,348 +7,391 @@
 <meta name="description" content="G Pradeep Kumar — software engineer in Bengaluru building backend services and AI applications: LLM agents, fintech microservices, computer vision.">
 <meta property="og:title" content="G Pradeep Kumar — Software Engineer">
 <meta property="og:description" content="Backend services and AI applications, built and tested end to end.">
-<meta name="theme-color" content="#0D0B1E">
+<meta name="theme-color" content="#06120D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --night:#0D0B1E;
-    --deep:#15122C;
-    --raise:#1D1939;
-    --line:#2C2752;
-    --line-2:#3D3770;
-    --text:#EEECF8;
-    --muted:#A6A2C6;
-    --dim:#77729C;
-    --violet:#8C7CFF;
-    --violet-soft:rgba(140,124,255,.16);
-    --mint:#4FE3B5;
-    --mint-soft:rgba(79,227,181,.14);
-    --display:'Bricolage Grotesque', system-ui, sans-serif;
-    --body:'Instrument Sans', system-ui, sans-serif;
-    --maxw:1160px;
+    /* greens, darkest to lightest */
+    --forest:#06120D;
+    --pine:#0B1D16;
+    --moss:#11281F;
+    --fern:#1A3A2D;
+    --line:#1E3B2F;
+    --line-2:#2E5644;
+    --emerald:#1FBF80;
+    --jade:#4FE0A6;
+    --mint:#A7F3CF;
+    --sage:#9DB8A6;
+    --lime:#C6F06A;
+    /* supporting colours */
+    --gold:#E3C27E;
+    --gold-soft:rgba(227,194,126,.14);
+    --teal:#38B6C1;
+    --text:#ECF4EE;
+    --muted:#A4BBAD;
+    --dim:#6E8C7C;
+    --serif:'Instrument Serif', Georgia, serif;
+    --sans:'Manrope', system-ui, sans-serif;
+    --maxw:1180px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    margin:0; background:var(--night); color:var(--text);
-    font-family:var(--body); font-size:16px; line-height:1.6;
+    margin:0; background:var(--forest); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.65;
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   a{color:inherit;}
-  h1,h2,h3{font-family:var(--display); margin:0; font-weight:700; letter-spacing:-.02em; line-height:1.1;}
+  h1,h2,h3{margin:0; line-height:1.08;}
+  h1,h2{font-family:var(--serif); font-weight:400; letter-spacing:-.01em;}
+  h3{font-family:var(--sans); font-weight:700; letter-spacing:-.015em;}
   p{margin:0;}
-  ul{margin:0; padding:0;}
-  ::selection{background:var(--violet); color:var(--night);}
-  :focus-visible{outline:2px solid var(--mint); outline-offset:3px; border-radius:6px;}
+  ul,ol{margin:0; padding:0;}
+  ::selection{background:var(--jade); color:var(--forest);}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:8px;}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  section{position:relative; scroll-margin-top:80px;}
-  .skip{position:absolute; left:-999px; top:8px; background:var(--mint); color:var(--night); padding:8px 14px; border-radius:8px; z-index:100;}
+  section{position:relative; scroll-margin-top:84px;}
+  .skip{position:absolute; left:-999px; top:8px; background:var(--jade); color:var(--forest); padding:8px 14px; border-radius:8px; z-index:100;}
   .skip:focus{left:12px;}
 
-  /* ---------- aurora background ---------- */
-  .aurora{position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;}
-  .aurora i{position:absolute; border-radius:50%; filter:blur(90px); opacity:.55;}
-  .aurora .a1{width:620px; height:620px; background:#4B3BD6; top:-220px; left:-120px; animation:drift1 26s ease-in-out infinite alternate;}
-  .aurora .a2{width:520px; height:520px; background:#167A6A; top:-120px; right:-160px; opacity:.45; animation:drift2 32s ease-in-out infinite alternate;}
-  .aurora .a3{width:460px; height:460px; background:#5B2A8C; top:520px; left:35%; opacity:.28; animation:drift1 38s ease-in-out infinite alternate-reverse;}
-  .aurora::after{
-    content:""; position:absolute; inset:0;
-    background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
-    background-size:28px 28px;
-    mask-image:linear-gradient(to bottom, black, transparent 70%);
+  /* ---------- background: green aurora + grain ---------- */
+  .aurora{position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none;}
+  .aurora i{position:absolute; border-radius:50%; filter:blur(100px);}
+  .aurora .a1{width:700px; height:700px; background:#0F6B47; opacity:.55; top:-280px; left:-160px; animation:drift1 28s ease-in-out infinite alternate;}
+  .aurora .a2{width:560px; height:560px; background:#0D5258; opacity:.45; top:-160px; right:-180px; animation:drift2 34s ease-in-out infinite alternate;}
+  .aurora .a3{width:480px; height:480px; background:#5A6A1C; opacity:.18; top:460px; left:38%; animation:drift1 40s ease-in-out infinite alternate-reverse;}
+  .grain{
+    position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.07; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  @keyframes drift1{to{transform:translate(160px,120px) scale(1.15);}}
-  @keyframes drift2{to{transform:translate(-140px,160px) scale(.9);}}
+  @keyframes drift1{to{transform:translate(170px,130px) scale(1.15);}}
+  @keyframes drift2{to{transform:translate(-150px,170px) scale(.9);}}
 
   /* ---------- nav ---------- */
   .nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(13,11,30,.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:rgba(6,18,13,.7); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%);
     border-bottom:1px solid transparent; transition:border-color .3s;
   }
   .nav.scrolled{border-bottom-color:var(--line);}
   .nav-inner{max-width:var(--maxw); margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px;}
-  .brand{font-family:var(--display); font-weight:700; font-size:18px; text-decoration:none; display:flex; align-items:center; gap:10px;}
+  .brand{font-weight:700; font-size:17px; text-decoration:none; display:flex; align-items:center; gap:11px; letter-spacing:-.01em;}
   .brand-mark{
-    width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
-    background:linear-gradient(135deg,var(--violet),var(--mint)); color:var(--night); font-size:14px; font-weight:800;
+    width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+    font-family:var(--serif); font-size:17px; color:var(--gold);
+    background:radial-gradient(circle at 30% 25%, #1E5A43, #0B2219 70%);
+    border:1px solid rgba(227,194,126,.45);
   }
-  .links{display:flex; align-items:center; gap:28px;}
-  .links a{text-decoration:none; color:var(--muted); font-size:15px; transition:color .2s;}
-  .links a:hover{color:var(--text);}
-  .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--text); border-radius:10px; width:42px; height:42px; font-size:18px; cursor:pointer;}
+  .links{display:flex; align-items:center; gap:30px;}
+  .links a{text-decoration:none; color:var(--muted); font-size:15px; font-weight:500; transition:color .2s;}
+  .links a:hover{color:var(--mint);}
+  .menu-btn{display:none; background:none; border:1px solid var(--line-2); color:var(--text); border-radius:12px; width:42px; height:42px; font-size:18px; cursor:pointer;}
 
   .btn{
     display:inline-flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer;
-    font-family:var(--body); font-weight:600; font-size:15px; padding:12px 20px; border-radius:12px;
-    border:1px solid transparent; transition:transform .2s var(--ease), background .2s, border-color .2s, box-shadow .2s;
+    font-family:var(--sans); font-weight:700; font-size:15px; padding:13px 22px; border-radius:999px;
+    border:1px solid transparent; transition:transform .25s var(--ease), box-shadow .25s, border-color .25s, color .25s, background .25s;
   }
   .btn:hover{transform:translateY(-2px);}
-  .btn-main{background:var(--violet); color:#0D0B1E; box-shadow:0 10px 30px -10px rgba(140,124,255,.7);}
-  .btn-main:hover{background:#A296FF;}
-  .btn-line{border-color:var(--line-2); color:var(--text); background:rgba(255,255,255,.02);}
-  .btn-line:hover{border-color:var(--mint); color:var(--mint);}
+  .btn-main{
+    color:#04140D; background:linear-gradient(135deg,var(--mint) 0%,var(--jade) 45%,var(--emerald) 100%);
+    box-shadow:0 12px 32px -12px rgba(31,191,128,.8), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .btn-main:hover{box-shadow:0 16px 40px -12px rgba(31,191,128,.95), inset 0 1px 0 rgba(255,255,255,.5);}
+  .btn-line{border-color:rgba(227,194,126,.5); color:var(--gold); background:rgba(227,194,126,.04);}
+  .btn-line:hover{border-color:var(--gold); background:var(--gold-soft);}
   .btn svg{width:16px; height:16px; flex-shrink:0;}
-  .links .btn{padding:9px 16px; font-size:14px; color:#0D0B1E;}
+  .links .btn{padding:9px 18px; font-size:14px; color:#04140D;}
 
   /* ---------- hero ---------- */
-  .hero{padding:72px 0 64px;}
-  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
+  .hero{padding:80px 0 72px;}
+  .hero-grid{display:grid; grid-template-columns:1.08fr .92fr; gap:60px; align-items:center;}
   .avail{
-    display:inline-flex; align-items:center; gap:10px; font-size:14px; color:var(--muted);
-    border:1px solid var(--line); border-radius:999px; padding:6px 14px 6px 10px; background:rgba(255,255,255,.02);
+    display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:500; color:var(--sage);
+    border:1px solid var(--line-2); border-radius:999px; padding:7px 15px 7px 11px; background:rgba(17,40,31,.5);
   }
-  .pulse{width:8px; height:8px; border-radius:50%; background:var(--mint); position:relative;}
-  .pulse::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--mint); opacity:0; animation:ping 2.2s var(--ease) infinite;}
-  @keyframes ping{0%{transform:scale(.6); opacity:.8;} 100%{transform:scale(1.8); opacity:0;}}
-  .hero h1{
-    margin-top:26px; font-size:clamp(46px,7.4vw,92px); font-weight:800; letter-spacing:-.045em; line-height:.98;
+  .pulse{width:8px; height:8px; border-radius:50%; background:var(--lime); position:relative; flex-shrink:0;}
+  .pulse::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--lime); opacity:0; animation:ping 2.4s var(--ease) infinite;}
+  @keyframes ping{0%{transform:scale(.6); opacity:.8;} 100%{transform:scale(1.9); opacity:0;}}
+  .hero h1{margin-top:24px; font-size:clamp(64px,10vw,132px); line-height:.9; letter-spacing:-.025em;}
+  .hero h1 .ln{display:block; overflow:hidden; padding-bottom:.08em;}
+  .hero h1 .ln > span{display:inline-block;}
+  .hero h1 .ln:last-child > span{
+    background:linear-gradient(100deg,var(--mint) 0%,var(--jade) 35%,var(--emerald) 60%,var(--gold) 100%);
+    background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:sheen 9s ease-in-out infinite alternate;
   }
-  .hero h1 .ln{display:block; overflow:hidden; padding-bottom:.06em;}
-  .hero h1 .ln span{display:inline-block;}
-  .hero .lede{margin-top:26px; font-size:clamp(17px,1.6vw,19px); color:var(--muted); max-width:34em;}
+  @keyframes sheen{to{background-position:100% 0;}}
+  .hero .role{margin-top:18px; display:flex; align-items:center; gap:14px; font-size:15px; font-weight:600; color:var(--gold); letter-spacing:.01em;}
+  .hero .role::before{content:""; width:36px; height:1px; background:linear-gradient(90deg,var(--gold),transparent);}
+  .hero .lede{margin-top:22px; font-size:clamp(17px,1.6vw,19px); color:var(--muted); max-width:33em;}
   .hero .lede b{color:var(--text); font-weight:600;}
   .hero-cta{margin-top:34px; display:flex; flex-wrap:wrap; gap:12px;}
-  .facts{margin-top:44px; display:flex; flex-wrap:wrap; gap:10px 28px; font-size:14.5px; color:var(--muted);}
-  .facts strong{font-family:var(--display); font-size:20px; color:var(--text); font-weight:700; margin-right:6px;}
+  .facts{margin-top:46px; display:grid; grid-template-columns:repeat(4,auto); justify-content:start; gap:0; border-top:1px solid var(--line); padding-top:22px;}
+  .facts div{padding-right:28px; margin-right:28px; border-right:1px solid var(--line);}
+  .facts div:last-child{border-right:none; margin-right:0; padding-right:0;}
+  .facts strong{display:block; font-family:var(--serif); font-weight:400; font-size:38px; line-height:1; color:var(--mint);}
+  .facts span{display:block; font-size:13px; color:var(--dim); margin-top:6px;}
 
   /* load sequence */
   .js .hero .seq{opacity:0; transform:translateY(18px);}
-  .js .hero h1 .ln span{transform:translateY(105%);}
-  .js.loaded .hero .seq{opacity:1; transform:none; transition:opacity .8s var(--ease), transform .8s var(--ease); transition-delay:var(--d,0s);}
-  .js.loaded .hero h1 .ln span{transform:none; transition:transform 1s var(--ease); transition-delay:var(--d,0s);}
+  .js .hero h1 .ln > span{transform:translateY(105%);}
+  .js.loaded .hero .seq{opacity:1; transform:none; transition:opacity .9s var(--ease), transform .9s var(--ease); transition-delay:var(--d,0s);}
+  .js.loaded .hero h1 .ln > span{transform:none; transition:transform 1.1s var(--ease); transition-delay:var(--d,0s);}
 
   /* trace panel */
   .trace{
-    position:relative; background:linear-gradient(180deg,rgba(29,25,57,.92),rgba(21,18,44,.92));
-    border:1px solid var(--line); border-radius:22px; padding:22px 22px 18px;
-    box-shadow:0 40px 80px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.05);
+    position:relative; border-radius:26px; padding:24px 24px 20px; isolation:isolate;
+    background:linear-gradient(165deg,rgba(26,58,45,.78),rgba(11,29,22,.88));
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 50px 90px -40px rgba(0,0,0,.85), inset 0 1px 0 rgba(167,243,207,.08);
   }
   .trace::before{
-    content:""; position:absolute; inset:-1px; border-radius:23px; padding:1px; pointer-events:none;
-    background:linear-gradient(140deg,rgba(140,124,255,.7),transparent 40%,transparent 60%,rgba(79,227,181,.6));
+    content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none; z-index:-1;
+    background:conic-gradient(from var(--ang,0deg), rgba(227,194,126,.75), rgba(79,224,166,.15) 25%, rgba(56,182,193,.6) 50%, rgba(79,224,166,.15) 75%, rgba(227,194,126,.75));
     -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:spin 10s linear infinite;
   }
-  .trace-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:16px; border-bottom:1px solid var(--line);}
-  .trace-title{font-family:var(--display); font-size:17px; font-weight:600;}
-  .trace-sub{font-size:13px; color:var(--dim); margin-top:2px;}
+  @property --ang{syntax:'<angle>'; inherits:false; initial-value:0deg;}
+  @keyframes spin{to{--ang:360deg;}}
+  .trace-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:16px; border-bottom:1px solid var(--line-2);}
+  .trace-title{font-family:var(--serif); font-size:26px; line-height:1.1;}
+  .trace-sub{font-size:13px; color:var(--dim); margin-top:3px;}
   .status{
-    font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:999px; white-space:nowrap;
-    background:var(--violet-soft); color:#B9AFFF; transition:background .3s, color .3s;
+    font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;
+    background:var(--gold-soft); color:var(--gold); transition:background .3s, color .3s;
   }
-  .status.done{background:var(--mint-soft); color:var(--mint);}
+  .status.done{background:rgba(198,240,106,.14); color:var(--lime);}
   .steps-wrap{position:relative; margin:18px 0 6px; padding-left:34px;}
-  .steps{list-style:none; margin:0; padding:0;}
-  .rail{position:absolute; left:10px; top:12px; bottom:12px; width:2px; background:var(--line); border-radius:2px;}
-  .rail-fill{position:absolute; left:10px; top:12px; width:2px; height:0; border-radius:2px; background:linear-gradient(var(--violet),var(--mint)); transition:height .55s var(--ease);}
+  .steps{list-style:none;}
+  .rail{position:absolute; left:10px; top:12px; bottom:12px; width:2px; background:var(--line-2); border-radius:2px;}
+  .rail-fill{position:absolute; left:10px; top:12px; width:2px; height:0; border-radius:2px; background:linear-gradient(var(--teal),var(--jade),var(--lime)); transition:height .55s var(--ease);}
   .packet{
     position:absolute; left:4px; top:6px; z-index:1; width:14px; height:14px; border-radius:50%;
-    background:var(--mint); box-shadow:0 0 0 5px rgba(79,227,181,.18), 0 0 22px var(--mint);
+    background:var(--lime); box-shadow:0 0 0 5px rgba(198,240,106,.18), 0 0 24px var(--lime);
     transition:top .55s var(--ease);
   }
-  .step{position:relative; padding:9px 12px; margin-bottom:6px; border-radius:12px; border:1px solid transparent; transition:background .35s, border-color .35s;}
+  .step{position:relative; padding:9px 13px; margin-bottom:6px; border-radius:14px; border:1px solid transparent; transition:background .35s, border-color .35s;}
   .step::before{
     content:""; position:absolute; left:-29px; top:16px; width:10px; height:10px; border-radius:50%;
-    background:var(--night); border:2px solid var(--line-2); transition:border-color .3s, background .3s;
+    background:var(--pine); border:2px solid var(--line-2); transition:border-color .3s, background .3s;
   }
-  .step b{display:block; font-weight:600; font-size:15px; color:var(--muted); transition:color .3s;}
+  .step b{display:block; font-weight:700; font-size:15px; color:var(--muted); transition:color .3s;}
   .step span{display:block; font-size:13px; color:var(--dim);}
   .step.on b{color:var(--text);}
-  .step.on::before{border-color:var(--violet); background:var(--violet);}
-  .step.now{background:rgba(140,124,255,.08); border-color:rgba(140,124,255,.25);}
-  .trace-tabs{display:flex; flex-wrap:wrap; gap:8px; padding-top:14px; border-top:1px solid var(--line);}
+  .step.on::before{border-color:var(--jade); background:var(--jade);}
+  .step.now{background:rgba(79,224,166,.08); border-color:rgba(79,224,166,.28);}
+  .trace-tabs{display:flex; flex-wrap:wrap; gap:8px; padding-top:16px; border-top:1px solid var(--line-2);}
   .trace-tabs button{
-    font-family:var(--body); font-size:13px; font-weight:500; color:var(--muted); cursor:pointer;
-    background:transparent; border:1px solid var(--line); border-radius:999px; padding:6px 12px; transition:all .2s;
+    font-family:var(--sans); font-size:13px; font-weight:600; color:var(--muted); cursor:pointer;
+    background:transparent; border:1px solid var(--line-2); border-radius:999px; padding:6px 13px; transition:all .2s;
   }
-  .trace-tabs button:hover{color:var(--text); border-color:var(--line-2);}
-  .trace-tabs button[aria-selected="true"]{color:var(--night); background:var(--text); border-color:var(--text);}
+  .trace-tabs button:hover{color:var(--mint); border-color:var(--jade);}
+  .trace-tabs button[aria-selected="true"]{color:#04140D; background:var(--mint); border-color:var(--mint);}
   .steps.swap{animation:swap .45s var(--ease);}
   @keyframes swap{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
 
   /* ---------- ticker ---------- */
-  .ticker{border-block:1px solid var(--line); background:rgba(21,18,44,.6); overflow:hidden; padding:18px 0;}
-  .ticker-track{display:flex; gap:44px; width:max-content; animation:tick 50s linear infinite;}
+  .ticker{border-block:1px solid var(--line); background:rgba(11,29,22,.55); overflow:hidden; padding:20px 0;}
+  .ticker-track{display:flex; gap:40px; width:max-content; animation:tick 55s linear infinite;}
   .ticker:hover .ticker-track{animation-play-state:paused;}
-  .ticker-track span{font-family:var(--display); font-size:19px; font-weight:500; color:var(--muted); white-space:nowrap; display:flex; align-items:center; gap:44px;}
-  .ticker-track span::after{content:""; width:7px; height:7px; border-radius:2px; background:var(--violet); transform:rotate(45deg); opacity:.8;}
+  .ticker-track span{font-family:var(--serif); font-size:26px; color:var(--sage); white-space:nowrap; display:flex; align-items:center; gap:40px;}
+  .ticker-track span:nth-child(3n+2){color:var(--jade);}
+  .ticker-track span:nth-child(3n){font-style:italic; color:var(--gold);}
+  .ticker-track span::after{content:"✦"; font-family:var(--sans); font-size:14px; color:var(--emerald); font-style:normal;}
   @keyframes tick{to{transform:translateX(-50%);}}
 
   /* ---------- sections ---------- */
-  .block{padding:104px 0;}
-  .head{max-width:640px; margin-bottom:44px;}
-  .head h2{font-size:clamp(32px,4.4vw,52px); letter-spacing:-.035em;}
-  .head p{margin-top:14px; color:var(--muted); font-size:17px;}
-
-  .js .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .block{padding:110px 0;}
+  .head{max-width:660px; margin-bottom:46px;}
+  .head h2{font-size:clamp(44px,6vw,76px); line-height:.98;}
+  .head p{margin-top:16px; color:var(--muted); font-size:17px;}
+  .js .reveal{opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
   .js .reveal.in{opacity:1; transform:none;}
 
   /* ---------- about ---------- */
-  .about{display:grid; grid-template-columns:1.25fr 1fr; gap:56px; align-items:start;}
+  .about{display:grid; grid-template-columns:1.25fr 1fr; gap:60px; align-items:start;}
   .about-text p{color:var(--muted); font-size:17.5px; margin-bottom:18px; max-width:36em;}
   .about-text p strong{color:var(--text); font-weight:600;}
-  .about-card{background:var(--deep); border:1px solid var(--line); border-radius:20px; padding:8px 24px;}
+  .about-card{
+    position:relative; border-radius:24px; padding:10px 26px;
+    background:linear-gradient(165deg,rgba(26,58,45,.6),rgba(11,29,22,.75)); border:1px solid var(--line-2);
+  }
+  .about-card::before{content:""; position:absolute; top:-1px; left:26px; right:26px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent);}
   .about-card dl{margin:0;}
-  .about-card div{display:flex; justify-content:space-between; gap:16px; padding:15px 0; border-bottom:1px solid var(--line); font-size:15px;}
+  .about-card div{display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px;}
   .about-card div:last-child{border-bottom:none;}
   .about-card dt{color:var(--dim);}
-  .about-card dd{margin:0; text-align:right; font-weight:500;}
-  .about-card dd a{text-decoration:none; color:var(--mint);}
+  .about-card dd{margin:0; text-align:right; font-weight:600;}
+  .about-card dd a{text-decoration:none; color:var(--jade);}
   .about-card dd a:hover{text-decoration:underline;}
 
-  /* ---------- projects ---------- */
-  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
+  /* ---------- projects (bento) ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px;}
   .filters button{
-    font-family:var(--body); font-size:14.5px; font-weight:500; cursor:pointer; color:var(--muted);
-    background:var(--deep); border:1px solid var(--line); border-radius:999px; padding:9px 16px; transition:all .2s;
+    font-family:var(--sans); font-size:14.5px; font-weight:600; cursor:pointer; color:var(--muted);
+    background:rgba(17,40,31,.6); border:1px solid var(--line-2); border-radius:999px; padding:9px 17px; transition:all .2s;
   }
-  .filters button:hover{color:var(--text); border-color:var(--line-2);}
-  .filters button[aria-pressed="true"]{background:var(--violet); border-color:var(--violet); color:var(--night);}
-  .filters button .n{opacity:.65; margin-left:4px;}
+  .filters button:hover{color:var(--mint); border-color:var(--jade);}
+  .filters button[aria-pressed="true"]{background:var(--mint); border-color:var(--mint); color:#04140D;}
+  .filters button .n{opacity:.6; margin-left:5px;}
 
-  .plist{list-style:none; display:flex; flex-direction:column; gap:14px;}
+  .plist{list-style:none; display:grid; grid-template-columns:repeat(6,1fr); gap:16px; align-items:start;}
   .proj{
-    position:relative; background:var(--deep); border:1px solid var(--line); border-radius:20px;
-    overflow:hidden; transition:border-color .3s, transform .3s var(--ease);
+    grid-column:span 2; position:relative; border-radius:24px; overflow:hidden;
+    background:linear-gradient(165deg,rgba(17,40,31,.85),rgba(11,29,22,.9)); border:1px solid var(--line);
+    transition:border-color .3s, transform .35s var(--ease);
   }
+  .proj.feat{grid-column:span 3;}
   .proj::before{
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s;
-    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(140,124,255,.13), transparent 60%);
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .35s;
+    background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%), rgba(79,224,166,.12), transparent 60%);
   }
-  .proj:hover{border-color:var(--line-2);}
+  .proj:hover{border-color:var(--line-2); transform:translateY(-3px);}
   .proj:hover::before{opacity:1;}
   .proj.hide{display:none;}
-  .proj-row{
-    position:relative; display:grid; grid-template-columns:1fr 170px auto; gap:28px; align-items:center;
-    padding:26px 28px;
-  }
-  .proj-main h3{font-size:24px; letter-spacing:-.025em; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
-  .tag-new{font-family:var(--body); font-size:12px; font-weight:600; letter-spacing:0; color:var(--mint); background:var(--mint-soft); padding:3px 9px; border-radius:999px;}
-  .proj-main p{color:var(--muted); margin-top:8px; max-width:40em;}
-  .chips{display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;}
-  .chip{font-size:12.5px; color:#CBC7E8; background:var(--raise); border:1px solid var(--line); padding:4px 10px; border-radius:8px;}
-  .result{border-left:1px solid var(--line); padding-left:24px;}
-  .result .big{font-family:var(--display); font-size:34px; font-weight:700; letter-spacing:-.03em; line-height:1; background:linear-gradient(120deg,#B4A9FF,var(--mint)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .result .lbl{font-size:13px; color:var(--dim); margin-top:6px; line-height:1.4;}
-  .proj-actions{display:flex; flex-direction:column; gap:8px; align-items:stretch;}
+  .proj-card{position:relative; padding:28px; display:flex; flex-direction:column; gap:16px;}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px;}
+  .proj h3{font-size:22px;}
+  .proj.feat h3{font-family:var(--serif); font-weight:400; font-size:36px; letter-spacing:-.01em; line-height:1.02;}
+  .tag-new{font-size:12px; font-weight:700; color:var(--lime); background:rgba(198,240,106,.12); border:1px solid rgba(198,240,106,.3); padding:3px 10px; border-radius:999px; white-space:nowrap;}
+  .proj p.desc{color:var(--muted); font-size:15.5px;}
+  .chips{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{font-size:12.5px; font-weight:500; color:#CFE3D6; background:rgba(26,58,45,.7); border:1px solid var(--line-2); padding:4px 11px; border-radius:999px;}
+  .proj-foot{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-top:18px; margin-top:4px; border-top:1px solid var(--line);}
+  .result .big{font-family:var(--serif); font-size:46px; line-height:.95; color:var(--mint);}
+  .proj:not(.feat) .result .big{font-size:36px;}
+  .proj:not(.feat) .proj-foot{flex-direction:column; align-items:flex-start;}
+  .proj:not(.feat) .result .lbl{max-width:none;}
+  .proj.feat:nth-child(2) .result .big{color:var(--teal);}
+  .proj.feat:nth-child(3) .result .big{color:var(--lime);}
+  .proj.feat:nth-child(4) .result .big{color:var(--gold);}
+  .result .lbl{font-size:13px; color:var(--dim); margin-top:6px; line-height:1.4; max-width:16em;}
+  .proj-actions{display:flex; gap:8px; flex-shrink:0;}
   .proj-actions a, .proj-actions button{
-    font-family:var(--body); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; text-align:center;
-    padding:9px 14px; border-radius:10px; border:1px solid var(--line-2); background:transparent; color:var(--text);
-    display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:all .2s; white-space:nowrap;
+    font-family:var(--sans); font-size:13.5px; font-weight:700; text-decoration:none; cursor:pointer;
+    padding:9px 14px; border-radius:999px; border:1px solid var(--line-2); background:rgba(6,18,13,.4); color:var(--text);
+    display:inline-flex; align-items:center; justify-content:center; gap:7px; transition:all .2s; white-space:nowrap;
   }
-  .proj-actions a:hover{border-color:var(--mint); color:var(--mint);}
-  .proj-actions button:hover{border-color:var(--violet); color:#B9AFFF;}
+  .proj-actions a:hover{border-color:var(--jade); color:var(--mint);}
+  .proj-actions button:hover{border-color:var(--gold); color:var(--gold);}
   .proj-actions svg{width:15px; height:15px;}
   .proj-actions .chev{transition:transform .35s var(--ease);}
   .proj.open .chev{transform:rotate(180deg);}
   .proj-more{display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s var(--ease);}
   .proj.open .proj-more{grid-template-rows:1fr;}
   .proj-more > div{overflow:hidden;}
-  .proj-more ul{list-style:none; margin:0 28px 26px; padding-top:20px; border-top:1px dashed var(--line); display:grid; grid-template-columns:1fr 1fr; gap:12px 34px;}
-  .proj-more li{position:relative; padding-left:22px; color:var(--muted); font-size:15px;}
-  .proj-more li::before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:2px; background:var(--violet); transform:rotate(45deg);}
+  .proj-more ul{list-style:none; margin:0 28px 26px; padding-top:18px; border-top:1px dashed var(--line-2); display:flex; flex-direction:column; gap:10px;}
+  .proj-more li{position:relative; padding-left:22px; color:var(--muted); font-size:14.5px;}
+  .proj-more li::before{content:"✦"; position:absolute; left:0; top:0; font-size:12px; color:var(--jade);}
+  .earlier{grid-column:1 / -1; display:flex; align-items:center; gap:16px; margin:26px 0 4px; font-family:var(--serif); font-size:26px; color:var(--sage);}
+  .earlier::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line-2),transparent);}
+  .earlier.hide{display:none;}
 
   /* ---------- experience ---------- */
-  .timeline{list-style:none; position:relative; padding-left:0;}
-  .tl{display:grid; grid-template-columns:190px 36px 1fr; padding-bottom:48px;}
+  .timeline{list-style:none;}
+  .tl{display:grid; grid-template-columns:200px 40px 1fr; padding-bottom:52px;}
   .tl:last-child{padding-bottom:0;}
-  .tl-date{font-family:var(--display); font-size:16px; font-weight:600; color:var(--text); padding-top:2px;}
-  .tl-date span{display:block; font-family:var(--body); font-size:13px; font-weight:400; color:var(--dim); margin-top:2px;}
+  .tl-date{font-weight:700; font-size:15.5px; color:var(--text); padding-top:3px;}
+  .tl-date span{display:block; font-size:13px; font-weight:500; color:var(--dim); margin-top:2px;}
   .tl-rail{display:flex; flex-direction:column; align-items:center;}
-  .tl-dot{width:14px; height:14px; border-radius:50%; background:var(--night); border:3px solid var(--violet); margin-top:6px; flex-shrink:0;}
-  .tl:first-child .tl-dot{border-color:var(--mint); box-shadow:0 0 0 6px var(--mint-soft);}
-  .tl-line{flex:1; width:2px; background:linear-gradient(var(--line-2),var(--line)); margin-top:8px;}
+  .tl-dot{width:14px; height:14px; border-radius:50%; background:var(--forest); border:3px solid var(--emerald); margin-top:7px; flex-shrink:0;}
+  .tl:first-child .tl-dot{border-color:var(--lime); box-shadow:0 0 0 6px rgba(198,240,106,.14);}
+  .tl-line{flex:1; width:1px; background:linear-gradient(var(--jade),var(--line)); margin-top:8px; opacity:.7;}
   .tl:last-child .tl-line{display:none;}
   .tl-body{padding-left:14px;}
-  .tl-body h3{font-size:22px;}
-  .tl-body .org{display:block; color:var(--violet); font-weight:500; margin-top:4px;}
+  .tl-body h3{font-family:var(--serif); font-weight:400; font-size:34px; letter-spacing:-.005em;}
+  .tl-body .org{display:block; color:var(--gold); font-weight:600; margin-top:6px;}
   .tl-body ul{list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:9px;}
-  .tl-body li{position:relative; padding-left:20px; color:var(--muted); max-width:44em;}
-  .tl-body li::before{content:""; position:absolute; left:0; top:11px; width:8px; height:2px; background:var(--dim);}
+  .tl-body li{position:relative; padding-left:22px; color:var(--muted); max-width:44em;}
+  .tl-body li::before{content:""; position:absolute; left:0; top:12px; width:10px; height:1px; background:var(--jade);}
 
   /* ---------- skills ---------- */
   .skills{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-  .sk{background:var(--deep); border:1px solid var(--line); border-radius:18px; padding:24px;}
+  .sk{border-radius:22px; padding:26px; background:linear-gradient(165deg,rgba(17,40,31,.8),rgba(11,29,22,.85)); border:1px solid var(--line);}
   .sk.wide{grid-column:span 2;}
-  .sk h3{font-size:18px; margin-bottom:16px;}
-  .sk .chips{margin-top:0; gap:8px;}
-  .sk .chip{font-size:14px; padding:6px 12px; border-radius:10px;}
+  .sk h3{font-family:var(--serif); font-weight:400; font-size:26px; margin-bottom:16px; display:flex; align-items:center; gap:12px;}
+  .sk h3::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c,var(--jade)); box-shadow:0 0 14px var(--c,var(--jade));}
+  .sk .chip{font-size:14px; padding:6px 13px;}
 
   /* ---------- certs + education ---------- */
-  .two{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
-  .two h2{font-size:clamp(28px,3.4vw,40px); letter-spacing:-.03em; margin-bottom:26px;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .two h2{font-size:clamp(40px,4.6vw,58px); margin-bottom:26px;}
   .clist{list-style:none; display:flex; flex-direction:column;}
-  .clist li{display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .clist li{display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:19px 0; border-bottom:1px solid var(--line);}
   .clist li:first-child{padding-top:0;}
-  .clist b{display:block; font-weight:600;}
+  .clist b{display:block; font-weight:700;}
   .clist span{display:block; font-size:13.5px; color:var(--dim); margin-top:3px; word-break:break-word;}
-  .clist time{font-size:14px; color:var(--muted); white-space:nowrap;}
+  .clist time{font-size:14px; font-weight:600; color:var(--gold); white-space:nowrap;}
 
   /* ---------- contact ---------- */
   .contact{padding:40px 0 48px;}
   .cta{
-    position:relative; overflow:hidden; border-radius:28px; padding:72px 48px; text-align:center;
-    background:linear-gradient(135deg,#2A1F78 0%,#1A1642 45%,#0F3D3A 100%); border:1px solid var(--line-2);
+    position:relative; overflow:hidden; border-radius:32px; padding:84px 48px; text-align:center; isolation:isolate;
+    background:radial-gradient(120% 140% at 50% 0%, #16553C 0%, #0C2E22 45%, #071A13 100%); border:1px solid var(--line-2);
   }
   .cta::before{
-    content:""; position:absolute; width:520px; height:520px; border-radius:50%; left:50%; top:-60%;
-    transform:translateX(-50%); background:radial-gradient(closest-side,rgba(140,124,255,.45),transparent); pointer-events:none;
+    content:""; position:absolute; width:620px; height:620px; border-radius:50%; left:50%; top:-75%; z-index:-1;
+    transform:translateX(-50%); background:radial-gradient(closest-side,rgba(79,224,166,.35),transparent); pointer-events:none;
   }
-  .cta > *{position:relative;}
-  .cta h2{font-size:clamp(34px,5.4vw,64px); letter-spacing:-.04em;}
-  .cta p{color:#CFCBEA; margin:16px auto 0; max-width:34em; font-size:17px;}
-  .cta-actions{margin-top:32px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+  .cta::after{content:""; position:absolute; top:0; left:15%; right:15%; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .cta h2{font-size:clamp(48px,7.4vw,96px); line-height:.95;}
+  .cta p{color:#C6DACD; margin:18px auto 0; max-width:34em; font-size:17px;}
+  .cta-actions{margin-top:34px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
   .copy{
     margin:22px auto 0; display:inline-flex; align-items:center; gap:12px; max-width:100%;
-    background:rgba(13,11,30,.5); border:1px solid var(--line-2); border-radius:999px; padding:8px 8px 8px 20px;
-    font-family:var(--body); font-size:15px; color:var(--text); cursor:pointer; transition:border-color .2s;
+    background:rgba(6,18,13,.55); border:1px solid var(--line-2); border-radius:999px; padding:8px 8px 8px 20px;
+    font-family:var(--sans); font-size:15px; font-weight:500; color:var(--text); cursor:pointer; transition:border-color .2s;
   }
-  .copy:hover{border-color:var(--mint);}
+  .copy:hover{border-color:var(--jade);}
   .copy .addr{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;}
-  .copy .tag{font-weight:600; font-size:13px; background:var(--mint); color:var(--night); border-radius:999px; padding:7px 14px; white-space:nowrap; transition:background .2s;}
-  .copy.ok .tag{background:var(--violet);}
-  .socials{margin-top:30px; display:flex; flex-wrap:wrap; gap:12px 28px; justify-content:center; font-size:15px;}
-  .socials a{text-decoration:none; color:#CFCBEA;}
+  .copy .tag{font-weight:700; font-size:13px; background:var(--gold); color:#1A1405; border-radius:999px; padding:7px 14px; white-space:nowrap; transition:background .2s;}
+  .copy.ok .tag{background:var(--lime);}
+  .socials{margin-top:30px; display:flex; flex-wrap:wrap; gap:12px 30px; justify-content:center; font-size:15px; font-weight:500;}
+  .socials a{text-decoration:none; color:#C6DACD;}
   .socials a:hover{color:var(--mint);}
   footer{padding:20px 0 48px; text-align:center; color:var(--dim); font-size:14px;}
 
   /* ---------- responsive ---------- */
-  @media (max-width:960px){
-    .hero-grid{grid-template-columns:1fr; gap:44px;}
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr; gap:48px;}
     .about{grid-template-columns:1fr; gap:36px;}
-    .proj-row{grid-template-columns:1fr auto; gap:20px;}
-    .proj-main{grid-column:1 / -1;}
-    .result{border-left:none; padding-left:0;}
-    .proj-actions{flex-direction:row;}
+    .plist{grid-template-columns:1fr 1fr;}
+    .proj, .proj.feat{grid-column:span 1;}
     .skills{grid-template-columns:1fr 1fr;}
     .two{grid-template-columns:1fr; gap:64px;}
   }
   @media (max-width:760px){
     .links{
-      position:fixed; top:70px; left:12px; right:12px; flex-direction:column; align-items:stretch; gap:4px;
-      background:var(--deep); border:1px solid var(--line); border-radius:18px; padding:12px;
+      position:fixed; top:72px; left:12px; right:12px; flex-direction:column; align-items:stretch; gap:4px;
+      background:var(--pine); border:1px solid var(--line-2); border-radius:20px; padding:12px;
       opacity:0; transform:translateY(-8px); pointer-events:none; transition:opacity .25s, transform .25s var(--ease);
     }
     .links.open{opacity:1; transform:none; pointer-events:auto;}
     .links a{padding:10px 12px;}
     .links .btn{justify-content:center; margin-top:6px;}
     .menu-btn{display:block;}
-    .block{padding:80px 0;}
-    .hero{padding:48px 0 52px;}
-    .proj-row{grid-template-columns:1fr; padding:22px 20px;}
-    .proj-actions{justify-content:flex-start; flex-wrap:wrap;}
-    .proj-more ul{grid-template-columns:1fr; margin:0 20px 22px;}
+    .block{padding:84px 0;}
+    .hero{padding:48px 0 56px;}
+    .facts{grid-template-columns:1fr 1fr; row-gap:20px;}
+    .facts div{margin-right:0; padding-right:0; border-right:none;}
+    .plist{grid-template-columns:1fr;}
+    .proj-card{padding:24px 22px;}
+    .proj.feat h3{font-size:32px;}
+    .proj-foot{flex-direction:column; align-items:flex-start;}
+    .proj-more ul{margin:0 22px 22px;}
     .tl{grid-template-columns:22px 1fr; row-gap:4px;}
     .tl-date{grid-column:2; grid-row:1; padding-left:14px;}
     .tl-rail{grid-column:1; grid-row:1 / span 2;}
     .tl-body{grid-column:2; grid-row:2;}
+    .tl-body h3{font-size:30px;}
     .skills{grid-template-columns:1fr;}
     .sk.wide{grid-column:auto;}
-    .cta{padding:52px 22px; border-radius:22px;}
+    .cta{padding:56px 22px; border-radius:24px;}
     .clist li{flex-direction:column; gap:4px;}
   }
 
@@ -356,13 +399,14 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{animation:none !important; transition:none !important;}
     .js .reveal, .js .hero .seq{opacity:1; transform:none;}
-    .js .hero h1 .ln span{transform:none;}
+    .js .hero h1 .ln > span{transform:none;}
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+<div class="grain" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="nav-inner">
@@ -385,28 +429,29 @@
   <section class="hero" id="top">
     <div class="wrap hero-grid">
       <div>
-        <span class="avail seq" style="--d:.05s"><span class="pulse"></span>Open to software, AI/ML and data roles · Bengaluru</span>
+        <span class="avail seq" style="--d:.05s"><span class="pulse"></span>Open to software, AI/ML and data roles in Bengaluru</span>
         <h1>
           <span class="ln"><span style="--d:.15s">G Pradeep</span></span>
-          <span class="ln"><span style="--d:.28s">Kumar</span></span>
+          <span class="ln"><span style="--d:.3s">Kumar</span></span>
         </h1>
-        <p class="lede seq" style="--d:.5s">Software engineer building <b>backend services and AI applications</b> end to end — LLM agents with RAG and tool calling, fintech microservices with resilient integrations, and computer-vision models tuned for the edge.</p>
-        <div class="hero-cta seq" style="--d:.62s">
+        <p class="role seq" style="--d:.48s">Software Engineer, Backend &amp; AI</p>
+        <p class="lede seq" style="--d:.58s">I build <b>backend services and AI applications</b> end to end — LLM agents with RAG and tool calling, fintech microservices with resilient integrations, and computer-vision models tuned for the edge.</p>
+        <div class="hero-cta seq" style="--d:.7s">
           <a href="#projects" class="btn btn-main">See my projects</a>
           <a href="G_Pradeep_Kumar_Resume.pdf" class="btn btn-line" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg>
             Download resume
           </a>
         </div>
-        <div class="facts seq" style="--d:.74s">
-          <span><strong>7</strong>projects on GitHub</span>
-          <span><strong>3</strong>roles</span>
-          <span><strong>4</strong>certifications</span>
-          <span><strong>B.Tech</strong>CSE, 2025</span>
+        <div class="facts seq" style="--d:.82s">
+          <div><strong>7</strong><span>projects on GitHub</span></div>
+          <div><strong>3</strong><span>roles</span></div>
+          <div><strong>4</strong><span>certifications</span></div>
+          <div><strong>2025</strong><span>B.Tech CSE</span></div>
         </div>
       </div>
 
-      <div class="trace seq" style="--d:.4s" aria-label="Animated walkthrough of how my projects process a request">
+      <div class="trace seq" style="--d:.42s" aria-label="Animated walkthrough of how my projects process a request">
         <div class="trace-head">
           <div>
             <div class="trace-title" id="traceTitle">AI Support Agent</div>
@@ -452,7 +497,7 @@
   </section>
 
   <!-- PROJECTS -->
-  <section class="block" id="projects" style="padding-top:24px;">
+  <section class="block" id="projects" style="padding-top:20px;">
     <div class="wrap">
       <div class="head reveal">
         <h2>Things I've built.</h2>
@@ -466,19 +511,19 @@
         <button type="button" data-f="data" aria-pressed="false">Data<span class="n">2</span></button>
       </div>
 
-      <ul class="plist">
+      <ul class="plist" id="plist">
 
-        <li class="proj reveal" data-cat="ai backend">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>AI Support Agent <span class="tag-new">New</span></h3>
-              <p>An LLM customer-support agent for a hotel front desk. It answers from a knowledge base with RAG and calls tools to look up bookings, open tickets and hand off to a human.</p>
-              <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">OpenAI &amp; Anthropic APIs</span><span class="chip">RAG</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Kubernetes</span></div>
-            </div>
-            <div class="result"><div class="big">18/18</div><div class="lbl">eval scenarios passing in CI</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/ai-support-agent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <li class="proj feat reveal" data-cat="ai backend">
+          <div class="proj-card">
+            <div class="proj-top"><h3>AI Support Agent</h3><span class="tag-new">New</span></div>
+            <p class="desc">An LLM customer-support agent for a hotel front desk. It answers from a knowledge base with RAG and calls tools to look up bookings, open tickets and hand off to a human.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">OpenAI &amp; Anthropic APIs</span><span class="chip">RAG</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span><span class="chip">Kubernetes</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">18/18</div><div class="lbl">eval scenarios passing in CI</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/ai-support-agent" target="_blank" rel="noopener" aria-label="AI Support Agent code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
@@ -487,21 +532,20 @@
             <li>HMAC-signed, idempotent inbound webhook for WhatsApp/SMS providers, with replay protection.</li>
             <li>LLM extraction of guest emails into schema-validated booking JSON, plus a CSV/Excel booking importer.</li>
             <li>18-scenario eval suite and 24 pytest tests gate every merge in GitHub Actions.</li>
-            <li>Structured JSON logs and a Prometheus-style metrics endpoint.</li>
           </ul></div></div>
         </li>
 
-        <li class="proj reveal" data-cat="backend">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>KYC Orchestrator <span class="tag-new">New</span></h3>
-              <p>A fintech verification microservice. One API call checks identity, sanctions and address vendors in parallel, scores the risk, and approves, rejects or sends the case to manual review.</p>
-              <div class="chips"><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">PostgreSQL</span><span class="chip">Jest</span><span class="chip">Docker</span><span class="chip">Kubernetes</span></div>
-            </div>
-            <div class="result"><div class="big">29</div><div class="lbl">Jest tests, incl. PostgreSQL in CI</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/kyc-orchestrator" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <li class="proj feat reveal" data-cat="backend">
+          <div class="proj-card">
+            <div class="proj-top"><h3>KYC Orchestrator</h3><span class="tag-new">New</span></div>
+            <p class="desc">A fintech verification microservice. One API call checks identity, sanctions and address vendors in parallel, scores the risk, and approves, rejects or sends the case to manual review.</p>
+            <div class="chips"><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">PostgreSQL</span><span class="chip">Jest</span><span class="chip">Docker</span><span class="chip">Kubernetes</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">29</div><div class="lbl">Jest tests, incl. PostgreSQL in CI</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/kyc-orchestrator" target="_blank" rel="noopener" aria-label="KYC Orchestrator code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
@@ -510,44 +554,42 @@
             <li>Never auto-approves on missing data: a vendor timeout forces manual review.</li>
             <li>Multi-tenant API keys and idempotency keys make client retries safe.</li>
             <li>Transactional outbox delivers HMAC-signed webhooks with retries and dead-lettering.</li>
-            <li>OpenAPI spec, pino structured logs, Prometheus metrics and a CI/CD pipeline.</li>
           </ul></div></div>
         </li>
 
-        <li class="proj reveal" data-cat="ai">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>Defect Vision <span class="tag-new">New</span></h3>
-              <p>An industrial visual-inspection pipeline that classifies surface defects, flags unseen anomalies and draws where the defect is — then shrinks the model for edge devices.</p>
-              <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">ONNX</span><span class="chip">FastAPI</span></div>
-            </div>
-            <div class="result"><div class="big">99.75%</div><div class="lbl">validation accuracy, 0.996 macro-F1</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/defect-vision" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <li class="proj feat reveal" data-cat="ai">
+          <div class="proj-card">
+            <div class="proj-top"><h3>Defect Vision</h3><span class="tag-new">New</span></div>
+            <p class="desc">An industrial visual-inspection pipeline that classifies surface defects, flags unseen anomalies and draws where the defect is — then shrinks the model for edge devices.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">ONNX</span><span class="chip">FastAPI</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">99.75%</div><div class="lbl">validation accuracy, 0.996 macro-F1</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/defect-vision" target="_blank" rel="noopener" aria-label="Defect Vision code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
             <li>CNN trained on a 4,000-image, imbalanced synthetic dataset of scratches, spots and cracks.</li>
             <li>Autoencoder trained only on good parts catches 90.4% of defects at a 1% false-alarm rate.</li>
-            <li>OpenCV CLAHE preprocessing, augmentation and class-balanced sampling.</li>
             <li>Localises defects with residual thresholding, morphology and contours into boxes and masks.</li>
             <li>int8 quantization shrinks the model from 354 KB to 123 KB at equal accuracy; ONNX export with a parity test.</li>
             <li>FastAPI inspection endpoint returns a pass/reject verdict per part image.</li>
           </ul></div></div>
         </li>
 
-        <li class="proj reveal" data-cat="backend">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>Shipment Tracking Service <span class="tag-new">New</span></h3>
-              <p>A logistics REST API for booking shipments and tracking them through their delivery lifecycle, built with a layered controller–service–repository design.</p>
-              <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 3</span><span class="chip">Spring Data JPA</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Docker</span></div>
-            </div>
-            <div class="result"><div class="big">8-state</div><div class="lbl">delivery lifecycle as a state machine</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/shipment-tracking-service" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <li class="proj feat reveal" data-cat="backend">
+          <div class="proj-card">
+            <div class="proj-top"><h3>Shipment Tracking Service</h3><span class="tag-new">New</span></div>
+            <p class="desc">A logistics REST API for booking shipments and tracking them through their delivery lifecycle, built with a layered controller–service–repository design.</p>
+            <div class="chips"><span class="chip">Java 21</span><span class="chip">Spring Boot 3</span><span class="chip">Spring Data JPA</span><span class="chip">PostgreSQL</span><span class="chip">Flyway</span><span class="chip">Docker</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">8-state</div><div class="lbl">delivery lifecycle as a state machine</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/shipment-tracking-service" target="_blank" rel="noopener" aria-label="Shipment Tracking Service code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
@@ -555,63 +597,64 @@
             <li>Estimated delivery dates from Indian pincode regions, skipping Sundays.</li>
             <li>Optimistic locking so concurrent scanner updates can't overwrite each other.</li>
             <li>Full tracking history in one query with @EntityGraph — no N+1; paginated, filterable listing.</li>
-            <li>Flyway migrations, RFC 7807 problem+json errors and Actuator health probes.</li>
-            <li>JUnit 5 unit tests and MockMvc integration tests in GitHub Actions CI.</li>
+            <li>Flyway migrations, RFC 7807 errors, Actuator health probes, JUnit 5 and MockMvc tests.</li>
           </ul></div></div>
         </li>
 
+        <li class="earlier" id="earlier" aria-hidden="true">Earlier projects</li>
+
         <li class="proj reveal" data-cat="backend">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>Personal Finance Tracker API</h3>
-              <p>A REST API for tracking income, expenses and budgets, with authentication and per-user data isolation.</p>
-              <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">JWT</span></div>
-            </div>
-            <div class="result"><div class="big">7</div><div class="lbl">REST endpoints across 2 models</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/finance-tracker-api" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="proj-card">
+            <div class="proj-top"><h3>Personal Finance Tracker API</h3></div>
+            <p class="desc">A REST API for tracking income, expenses and budgets, with authentication and per-user data isolation.</p>
+            <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">JWT</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">7</div><div class="lbl">REST endpoints across 2 models</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/finance-tracker-api" target="_blank" rel="noopener" aria-label="Personal Finance Tracker API code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
             <li>JWT authentication with bcrypt password hashing.</li>
             <li>8 income/expense categories with full CRUD and filtering.</li>
             <li>Ownership-scoped queries keep each user's data isolated.</li>
-            <li>Server-side MongoDB aggregation pipeline for income, expense and budget analytics.</li>
+            <li>Server-side MongoDB aggregation for income, expense and budget analytics.</li>
           </ul></div></div>
         </li>
 
         <li class="proj reveal" data-cat="ai data">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>Credit Risk Prediction Model</h3>
-              <p>A machine-learning model that predicts loan default risk from applicant data, evaluated for class imbalance.</p>
-              <div class="chips"><span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span></div>
-            </div>
-            <div class="result"><div class="big">85.3%</div><div class="lbl">ROC-AUC on 5,000 applicants</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/credit-risk-prediction" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="proj-card">
+            <div class="proj-top"><h3>Credit Risk Prediction Model</h3></div>
+            <p class="desc">A machine-learning model that predicts loan default risk from applicant data, evaluated for class imbalance.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">85.3%</div><div class="lbl">ROC-AUC on 5,000 applicants</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/credit-risk-prediction" target="_blank" rel="noopener" aria-label="Credit Risk Prediction Model code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
             <li>Compared Logistic Regression and Random Forest on 5,000 applicant records.</li>
             <li>80% accuracy, with precision, recall and F1 to account for class imbalance.</li>
-            <li>Feature importance surfaced the top predictors: credit score, debt-to-income and income.</li>
+            <li>Top predictors: credit score, debt-to-income and income.</li>
           </ul></div></div>
         </li>
 
         <li class="proj reveal" data-cat="data">
-          <div class="proj-row">
-            <div class="proj-main">
-              <h3>Transactions Analytics Dashboard</h3>
-              <p>An interactive dashboard for exploring payment transactions by customer, category and channel.</p>
-              <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Streamlit</span></div>
-            </div>
-            <div class="result"><div class="big">6,000+</div><div class="lbl">transactions across 799 customers</div></div>
-            <div class="proj-actions">
-              <a href="https://github.com/PradeepG01/fintech-analytics-dashboard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
-              <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="proj-card">
+            <div class="proj-top"><h3>Transactions Analytics Dashboard</h3></div>
+            <p class="desc">An interactive dashboard for exploring payment transactions by customer, category and channel.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Streamlit</span></div>
+            <div class="proj-foot">
+              <div class="result"><div class="big">6,000+</div><div class="lbl">transactions across 799 customers</div></div>
+              <div class="proj-actions">
+                <a href="https://github.com/PradeepG01/fintech-analytics-dashboard" target="_blank" rel="noopener" aria-label="Transactions Analytics Dashboard code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>Code</a>
+                <button type="button" aria-expanded="false">Details <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+              </div>
             </div>
           </div>
           <div class="proj-more"><div><ul>
@@ -677,21 +720,21 @@
   </section>
 
   <!-- SKILLS -->
-  <section class="block" id="skills" style="padding-top:24px;">
+  <section class="block" id="skills" style="padding-top:20px;">
     <div class="wrap">
       <div class="head reveal"><h2>What I work with.</h2></div>
       <div class="skills">
-        <div class="sk reveal"><h3>Languages</h3><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div></div>
-        <div class="sk reveal"><h3>Frameworks</h3><div class="chips"><span class="chip">FastAPI</span><span class="chip">Spring Boot</span><span class="chip">Node.js (Express)</span><span class="chip">React</span></div></div>
-        <div class="sk reveal"><h3>Databases</h3><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span></div></div>
-        <div class="sk wide reveal"><h3>AI &amp; machine learning</h3><div class="chips"><span class="chip">OpenAI &amp; Anthropic APIs</span><span class="chip">RAG</span><span class="chip">AI agents &amp; tool calling</span><span class="chip">LLM evaluation</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">ONNX</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span></div></div>
-        <div class="sk reveal"><h3>Tools &amp; cloud</h3><div class="chips"><span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">GitHub Actions</span><span class="chip">AWS</span></div></div>
+        <div class="sk reveal" style="--c:var(--jade)"><h3>Languages</h3><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div></div>
+        <div class="sk reveal" style="--c:var(--teal)"><h3>Frameworks</h3><div class="chips"><span class="chip">FastAPI</span><span class="chip">Spring Boot</span><span class="chip">Node.js (Express)</span><span class="chip">React</span></div></div>
+        <div class="sk reveal" style="--c:var(--gold)"><h3>Databases</h3><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span></div></div>
+        <div class="sk wide reveal" style="--c:var(--lime)"><h3>AI &amp; machine learning</h3><div class="chips"><span class="chip">OpenAI &amp; Anthropic APIs</span><span class="chip">RAG</span><span class="chip">AI agents &amp; tool calling</span><span class="chip">LLM evaluation</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">ONNX</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span></div></div>
+        <div class="sk reveal" style="--c:var(--emerald)"><h3>Tools &amp; cloud</h3><div class="chips"><span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">GitHub Actions</span><span class="chip">AWS</span></div></div>
       </div>
     </div>
   </section>
 
   <!-- CERTS + EDUCATION -->
-  <section class="block" id="credentials" style="padding-top:24px;">
+  <section class="block" id="credentials" style="padding-top:20px;">
     <div class="wrap two">
       <div class="reveal">
         <h2>Certifications</h2>
@@ -786,7 +829,7 @@
   });
 
   function render(t){
-    stepsEl.querySelectorAll('.step').forEach(s => s.remove());
+    stepsEl.innerHTML = '';
     t.steps.forEach(([b, s]) => {
       const li = document.createElement('li'); li.className = 'step';
       li.innerHTML = '<b></b><span></span>';
@@ -826,20 +869,20 @@
     if (my !== run) return;
     idx = (idx + 1) % TRACES.length; play();
   }
-  setTimeout(play, reduced ? 0 : 600);
+  setTimeout(play, reduced ? 0 : 650);
   addEventListener('resize', () => { const on = stepsEl.querySelectorAll('.step.on'); if (on.length) moveTo(on[on.length-1]); });
 
   // ticker
-  const T = ['Backend development & REST APIs','Microservices & system design','LLMs, RAG & AI agents','Machine learning & model evaluation','Database design','Testing, CI/CD & deployment','Data structures, algorithms & OOP','Cross-functional collaboration'];
-  const tk = document.getElementById('ticker');
-  tk.innerHTML = [...T, ...T].map(x => '<span>' + x + '</span>').join('');
+  const T = ['Backend development & REST APIs','Microservices & system design','LLMs, RAG & AI agents','Machine learning & model evaluation','Database design','Testing, CI/CD & deployment','Data structures, algorithms & OOP','Cross-functional collaboration','Debugging & problem solving'];
+  document.getElementById('ticker').innerHTML = [...T, ...T].map(x => '<span>' + x.replace(/&/g,'&amp;') + '</span>').join('');
 
   // project filters
-  const fbtns = document.querySelectorAll('.filters button'), projs = document.querySelectorAll('.proj');
+  const fbtns = document.querySelectorAll('.filters button'), projs = document.querySelectorAll('.proj'), earlier = document.getElementById('earlier');
   fbtns.forEach(b => b.addEventListener('click', () => {
     const f = b.dataset.f;
     fbtns.forEach(x => x.setAttribute('aria-pressed', x === b));
     projs.forEach(p => { const show = f === 'all' || p.dataset.cat.split(' ').includes(f); p.classList.toggle('hide', !show); if (show) p.classList.add('in'); });
+    earlier.classList.toggle('hide', f !== 'all');
   }));
 
   // project expand + cursor glow
