@@ -220,7 +220,7 @@
   .buddy-btn:hover .brows, .buddy.happy .brows{transform:translateY(-5px);}
   .buddy.happy .mouth-grin{opacity:1;}
   .buddy.happy .mouth-calm{opacity:0;}
-  .buddy.happy .cheek{opacity:.45;}
+  .buddy.happy .cheek{opacity:.9;}
   .buddy.hop .person{animation:hop .6s var(--ease);}
   @keyframes hop{30%{transform:translateY(-14px) rotate(-1.5deg);} 60%{transform:translateY(0) rotate(1deg);} 100%{transform:none;}}
   .bubble{
@@ -530,6 +530,9 @@
               <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#22342B"/><stop offset="1" stop-color="#111B16"/>
               </linearGradient>
+              <linearGradient id="iris" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1E0F07"/><stop offset=".55" stop-color="#5A3016"/><stop offset="1" stop-color="#B07A3A"/>
+              </linearGradient>
               <linearGradient id="sleeveBack" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#1A925F"/><stop offset="1" stop-color="#106B48"/>
               </linearGradient>
@@ -551,92 +554,107 @@
             <g clip-path="url(#disc)" mask="url(#fade)">
               <!-- the person -->
               <g transform="translate(0 -14)"><g class="person">
-                <!-- torso: black collared shirt, fit build -->
-                <path d="M58 520 C60 432 80 376 140 358 C170 350 190 347 210 347 C230 347 250 350 280 358 C340 376 360 432 362 520 Z" fill="url(#hoodie)"/>
-                <path d="M60 470 C64 420 84 376 140 358 C170 350 190 347 210 347 C230 347 250 350 280 358 C336 376 356 420 360 470" fill="none" stroke="#4FE0A6" stroke-opacity=".45" stroke-width="2.5"/>
-                <path d="M152 398 C176 412 200 410 210 404 M268 398 C244 412 220 410 210 404" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none" opacity=".35"/>
+                <!-- anime style: lean, toned build in a black collared shirt -->
+                <path d="M86 520 C88 440 100 388 138 366 C162 353 186 348 210 348 C234 348 258 353 282 366 C320 388 332 440 334 520 Z" fill="url(#hoodie)" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M88 480 C92 426 106 388 138 366 C162 353 186 348 210 348" fill="none" stroke="#4FE0A6" stroke-opacity=".55" stroke-width="2.5"/>
+                <path d="M164 400 C184 410 200 408 210 400 M256 400 C236 410 220 408 210 400" stroke="#000" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".45"/>
                 <!-- neck -->
-                <path d="M156 362 C176 346 188 334 188 302 L232 302 C232 334 244 346 264 362 C244 368 176 368 156 362 Z" fill="#9A5F3D"/>
-                <rect x="186" y="292" width="48" height="62" rx="20" fill="#B97C55"/>
-                <path d="M186 318 C200 332 220 332 234 318 L234 302 L186 302 Z" fill="#7E4A2E" opacity=".7"/>
-                <!-- open collar showing a V of skin -->
-                <path d="M188 346 L210 392 L232 346 Z" fill="#B97C55"/>
-                <path d="M196 352 L210 384 L224 352" stroke="#7E4A2E" stroke-width="2" fill="none" opacity=".5"/>
-                <path d="M170 344 C178 340 186 340 190 344 L210 394 L182 378 L160 360 Z" fill="#1E2C25"/>
-                <path d="M250 344 C242 340 234 340 230 344 L210 394 L238 378 L260 360 Z" fill="#1E2C25"/>
-                <path d="M170 344 L210 394 M250 344 L210 394" stroke="#2F4438" stroke-width="2" fill="none"/>
-                <!-- placket + buttons -->
+                <path d="M191 286 L189 356 L231 356 L229 286 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M190 316 C200 334 220 334 230 316 L231 342 C216 336 204 336 189 342 Z" fill="#9A5F3D"/>
+                <path d="M196 344 C202 348 206 349 210 350 C214 349 218 348 224 344" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <!-- open collar -->
+                <path d="M192 350 L210 392 L228 350 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M201 360 L210 382" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
+                <path d="M172 346 C180 340 188 340 192 346 L210 394 L184 382 L164 362 Z" fill="#1E2C25" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M248 346 C240 340 232 340 228 346 L210 394 L236 382 L256 362 Z" fill="#1E2C25" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
                 <path d="M210 394 L210 520" stroke="#2A3B32" stroke-width="2"/>
-                <circle cx="214" cy="404" r="3" fill="#33473C"/>
+                <circle cx="214" cy="406" r="2.8" fill="#3A5044"/>
 
-                <!-- shoulders and upper arms in black sleeves -->
-                <path d="M80 406 C74 370 102 352 140 356 L154 440 C118 454 86 442 80 406 Z" fill="#1F2E26" stroke="#4FE0A6" stroke-opacity=".35" stroke-width="2"/>
-                <path d="M340 406 C346 370 318 352 280 356 L266 440 C302 454 334 442 340 406 Z" fill="#1F2E26" stroke="#4FE0A6" stroke-opacity=".35" stroke-width="2"/>
-                <!-- rolled cuffs -->
-                <path d="M86 426 C104 438 130 440 152 434 L150 448 C126 454 100 450 88 440 Z" fill="#26372E"/>
-                <path d="M334 426 C316 438 290 440 268 434 L270 448 C294 454 320 450 332 440 Z" fill="#26372E"/>
+                <!-- shoulders and rolled sleeves -->
+                <path d="M98 410 C94 378 114 360 142 360 L154 436 C126 446 102 438 98 410 Z" fill="#1F2E26" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M322 410 C326 378 306 360 278 360 L266 436 C294 446 318 438 322 410 Z" fill="#1F2E26" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M100 404 C102 380 116 366 138 362" stroke="#4FE0A6" stroke-opacity=".5" stroke-width="2" fill="none"/>
+                <path d="M102 424 C118 436 138 438 154 432 L153 446 C134 452 112 448 103 438 Z" fill="#2A3D33" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M318 424 C302 436 282 438 266 432 L267 446 C286 452 308 448 317 438 Z" fill="#2A3D33" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
 
                 <!-- crossed forearms -->
                 <g class="arms">
-                  <rect x="108" y="406" width="204" height="38" rx="19" fill="#9A5F3D" transform="rotate(-7 210 425)"/>
-                  <g transform="rotate(-12 122 404)">
-                    <rect x="102" y="386" width="38" height="36" rx="16" fill="#B97C55"/>
-                    <path d="M108 395 h24 M108 403 h26 M108 411 h22" stroke="#7E4A2E" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                  <rect x="120" y="409" width="180" height="32" rx="16" fill="#9A5F3D" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round" transform="rotate(-7 210 425)"/>
+                  <g transform="rotate(-12 124 404)">
+                    <rect x="109" y="391" width="31" height="29" rx="13" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                    <path d="M114 399 h19 M114 405.5 h21 M114 412 h17" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
                   </g>
-                  <rect x="104" y="428" width="212" height="42" rx="21" fill="#B97C55" transform="rotate(6 210 450)"/>
-                  <path d="M126 436 C170 438 230 444 296 452" stroke="#CC9068" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>
-                  <path d="M150 460 C190 463 236 467 276 470" stroke="#7E4A2E" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".35"/>
-                  <g transform="rotate(14 302 440)">
-                    <rect x="292" y="418" width="38" height="38" rx="17" fill="#B97C55"/>
-                    <path d="M300 427 h22 M300 435 h24 M300 443 h20" stroke="#7E4A2E" stroke-width="2.2" stroke-linecap="round" opacity=".6"/>
+                  <rect x="114" y="431" width="192" height="34" rx="17" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round" transform="rotate(6 210 448)"/>
+                  <path d="M136 455 C180 459 234 465 284 469" stroke="#9A5F3D" stroke-width="5" stroke-linecap="round" fill="none" opacity=".8"/>
+                  <path d="M138 438 C182 440 232 446 282 452" stroke="#DDA67D" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  <path d="M170 444 C186 446 196 446 206 448" stroke="#9A5F3D" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".7"/>
+                  <g transform="rotate(14 298 440)">
+                    <rect x="288" y="423" width="31" height="31" rx="14" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                    <path d="M294 431 h19 M294 437.5 h21 M294 444 h17" stroke="#9A5F3D" stroke-width="2" stroke-linecap="round"/>
                   </g>
-                  <rect x="272" y="430" width="15" height="24" rx="5" fill="#0B2A1F" transform="rotate(6 210 450)"/>
-                  <rect x="275" y="434" width="9" height="16" rx="2.5" fill="#C6F06A" transform="rotate(6 210 450)"/>
+                  <rect x="270" y="435" width="13" height="19" rx="4" fill="#0B2A1F" transform="rotate(6 210 448)"/>
+                  <rect x="272.5" y="438" width="8" height="13" rx="2" fill="#C6F06A" transform="rotate(6 210 448)"/>
                 </g>
 
                 <!-- head (moves with the cursor) -->
-                <g transform="translate(0 10)"><g class="head" id="head">
-                  <ellipse cx="153" cy="244" rx="11" ry="18" fill="#9A5F3D"/>
-                  <ellipse cx="267" cy="244" rx="11" ry="18" fill="#9A5F3D"/>
-                  <!-- oval face, slightly pointed chin -->
-                  <path d="M154 226 C154 180 178 160 210 160 C242 160 266 180 266 226 C266 268 254 298 232 314 C220 322 200 322 188 314 C166 298 154 268 154 226 Z" fill="#B97C55"/>
-                  <path d="M168 250 C174 262 182 266 190 266 M252 250 C246 262 238 266 230 266" stroke="#CC9068" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55"/>
-                  <!-- light stubble along the jaw and chin -->
-                  <path d="M156 252 C160 290 180 320 210 322 C240 320 260 290 264 252 C260 276 252 294 240 302 C234 306 226 306 222 300 C218 312 202 312 198 300 C194 306 186 306 180 302 C168 294 160 276 156 252 Z" fill="#2A1A12" opacity=".5"/>
-                  <path d="M198 302 C202 314 218 314 222 302 C218 306 202 306 198 302 Z" fill="#2A1A12" opacity=".45"/>
-                  <!-- thin moustache -->
-                  <path d="M190 279 C198 272 206 272 210 275 C214 272 222 272 230 279 C222 278 214 279 210 280 C206 279 198 278 190 279 Z" fill="#120C09"/>
-                  <!-- hair: thick, voluminous, swept up with waves -->
-                  <path d="M150 234 C141 198 144 170 158 152 C166 132 186 120 210 122 C224 114 248 116 262 128 C280 140 286 164 280 188 C280 204 276 220 270 234 C266 212 262 200 256 194 C250 184 236 178 222 180 C204 178 186 182 174 188 C162 198 156 214 150 234 Z" fill="#120C09"/>
-                  <path d="M162 160 C170 136 198 122 224 126 C208 132 196 142 190 156 C184 146 172 150 162 160 Z" fill="#2A1C15"/>
-                  <path d="M198 146 C208 128 238 122 256 136 C242 136 230 140 224 152 C218 142 206 142 198 146 Z" fill="#2A1C15"/>
-                  <path d="M236 152 C252 140 276 150 278 176 C268 162 254 158 242 164 Z" fill="#2A1C15"/><path d="M174 172 C190 160 212 160 228 166" stroke="#2A1C15" stroke-width="5" stroke-linecap="round" fill="none"/>
-                  <path d="M154 216 C152 204 155 194 160 188 L162 224 Z M266 216 C268 204 265 194 260 188 L258 224 Z" fill="#2E211A" opacity=".75"/>
-                  <!-- brows: thick, straight -->
+                <g transform="translate(-21 6) scale(1.1)"><g class="head" id="head">
+                  <!-- back hair mass -->
+                  <path d="M160 214 C150 182 154 150 176 134 C190 122 212 116 234 120 C260 126 278 150 274 182 C272 196 268 206 262 214 L254 200 L166 200 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                  <!-- volume on top: swept-up quiff -->
+                  <path d="M160 174 C154 152 164 132 184 126 C194 110 222 106 240 114 C258 112 276 126 276 146 C282 158 280 170 272 178 C266 162 248 150 228 146 C204 142 178 152 160 174 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M234 116 C248 102 268 100 282 110 C268 112 258 118 252 126 Z M200 118 C208 104 226 96 242 98 C230 104 222 110 218 118 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M190 132 C204 120 222 118 236 122 M246 124 C258 126 268 134 270 146" stroke="#3A3F4C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                  <!-- ears -->
+                  <path d="M164 220 C154 216 152 236 158 244 C162 248 166 246 167 242 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M256 220 C266 216 268 236 262 244 C258 248 254 246 253 242 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                  <!-- face: anime oval with a tapered chin -->
+                  <path d="M164 206 C164 172 184 152 210 152 C236 152 256 172 256 206 C256 234 250 254 239 268 L222 286 C216 292 204 292 198 286 L181 268 C170 254 164 234 164 206 Z" fill="#C28660" stroke="#2A1810" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M256 210 C255 236 249 256 238 269 L222 286 C230 270 240 252 243 222 Z" fill="#9A5F3D" opacity=".85"/>
+                  <!-- stubble on the chin and jaw -->
+                  <path d="M186 272 C194 284 202 290 210 290 C218 290 226 284 234 272 C228 286 220 294 210 294 C200 294 192 286 186 272 Z" fill="#2A1A12" opacity=".45"/>
+                  <path d="M203 280 C206 285 214 285 217 280 C214 283 206 283 203 280 Z" fill="#2A1A12" opacity=".55"/>
+                  <!-- swept-up front hair -->
+                  <path d="M166 206 C158 180 166 156 182 146 C180 130 196 118 212 124 C220 110 244 112 250 128 C266 132 272 150 264 162 C264 182 260 196 254 204 C248 190 240 180 228 174 C222 182 210 182 204 174 C196 180 188 184 182 188 C174 192 168 198 166 206 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M176 150 C172 138 180 126 192 124 C186 132 184 140 186 148 Z M206 126 C210 114 224 110 234 116 C224 118 216 122 212 130 Z M240 124 C252 122 262 130 262 142 C256 134 248 130 242 132 Z" fill="#120C09" stroke="#05080A" stroke-width="2.2" stroke-linejoin="round"/>
+                  <path d="M188 160 C194 144 210 136 228 138 M206 150 C216 138 236 134 250 144 M230 160 C242 152 254 154 260 164" stroke="#3A3F4C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                  <path d="M248 156 C256 168 258 184 256 196" stroke="#4FE0A6" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".75"/>
+                  <path d="M166 204 C164 192 166 180 172 172 L172 210 Z M254 204 C256 192 254 180 248 172 L248 210 Z" fill="#120C09"/>
+                  <!-- brows: thick and straight, like the photo -->
                   <g class="brows" id="brows">
-                    <path d="M168 214 C178 209 192 208 202 211" stroke="#120C09" stroke-width="6.5" stroke-linecap="round" fill="none"/>
-                    <path d="M218 211 C228 208 242 209 252 214" stroke="#120C09" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+                    <path d="M174 205 C184 200 196 200 204 203" stroke="#120C09" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+                    <path d="M216 203 C224 200 236 200 246 205" stroke="#120C09" stroke-width="4.2" stroke-linecap="round" fill="none"/>
                   </g>
-                  <!-- eyes -->
+                  <!-- anime eyes -->
                   <g class="eyes" id="eyes">
-                    <ellipse cx="186" cy="234" rx="10.5" ry="6.5" fill="#F6FBF7"/>
-                    <ellipse cx="234" cy="234" rx="10.5" ry="6.5" fill="#F6FBF7"/>
+                    <path d="M174 224 C178 213 198 211 204 222 C200 231 181 233 174 224 Z" fill="#F6FBF7"/>
+                    <path d="M216 222 C222 211 242 213 246 224 C239 233 220 231 216 222 Z" fill="#F6FBF7"/>
                     <g id="pupils">
-                      <circle cx="186" cy="234" r="5.2" fill="#120C09"/>
-                      <circle cx="234" cy="234" r="5.2" fill="#120C09"/>
-                      <circle cx="188" cy="232" r="1.7" fill="#fff"/>
-                      <circle cx="236" cy="232" r="1.7" fill="#fff"/>
+                      <ellipse cx="189.5" cy="223" rx="6.6" ry="8" fill="url(#iris)"/>
+                      <ellipse cx="230.5" cy="223" rx="6.6" ry="8" fill="url(#iris)"/>
+                      <circle cx="189.5" cy="224" r="3.2" fill="#0C0604"/>
+                      <circle cx="230.5" cy="224" r="3.2" fill="#0C0604"/>
+                      <circle cx="187.2" cy="219.6" r="2.3" fill="#fff"/>
+                      <circle cx="228.2" cy="219.6" r="2.3" fill="#fff"/>
+                      <circle cx="191.8" cy="227.4" r="1" fill="#fff" opacity=".85"/>
+                      <circle cx="232.8" cy="227.4" r="1" fill="#fff" opacity=".85"/>
                     </g>
+                    <path d="M172 223 C177 210 199 208 205 221" stroke="#0C0604" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M248 223 C243 210 221 208 215 221" stroke="#0C0604" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M179 230 C185 233 196 233 202 228 M218 228 C224 233 235 233 241 230" stroke="#7A4A30" stroke-width="1.4" stroke-linecap="round" fill="none"/>
                   </g>
-                  <path d="M175 229 C181 225 191 225 197 229 M223 229 C229 225 239 225 245 229" stroke="#4A2616" stroke-width="2.8" stroke-linecap="round" fill="none" opacity=".75"/>
                   <!-- nose -->
-                  <path d="M210 240 C205 255 202 262 211 264" stroke="#7E4A2E" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                  <!-- mouth: calm smile and big grin -->
-                  <path class="mouth-calm" d="M197 290 C205 295 216 295 224 289" stroke="#4A1E14" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                  <path class="mouth-grin" d="M191 286 C200 304 220 304 229 286 Z" fill="#4A1E14"/>
-                  <path class="mouth-grin" d="M196 288 C205 293 215 293 224 288 L224 291 C215 296 205 296 196 291 Z" fill="#F6FBF7"/>
-                  <ellipse class="cheek" cx="171" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
-                  <ellipse class="cheek" cx="249" cy="262" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
+                  <path d="M211 236 L208 249 L213 250" stroke="#83502F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <!-- thin moustache -->
+                  <path d="M196 257 C202 253 207 253 210 255 C213 253 218 253 224 257 C218 257 214 258 210 258.5 C206 258 202 257 196 257 Z" fill="#120C09"/>
+                  <!-- mouth -->
+                  <path class="mouth-calm" d="M202 265 C206 268 214 268 219 264" stroke="#5A2618" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                  <path class="mouth-grin" d="M199 262 C204 275 216 275 221 262 Z" fill="#6B2B22" stroke="#2A1810" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path class="mouth-grin" d="M201 263 L219 263 L218 265.6 L202 265.6 Z" fill="#F6FBF7"/>
+                  <!-- blush -->
+                  <g class="cheek" opacity="0" stroke="#E0786B" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M176 246 l4 -6 M182 246 l4 -6 M188 246 l4 -6"/>
+                    <path d="M230 246 l4 -6 M236 246 l4 -6 M242 246 l4 -6"/>
+                  </g>
                 </g></g>
               </g></g>
             </g>
