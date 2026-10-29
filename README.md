@@ -1,33 +1,30 @@
 # G Pradeep Kumar — Portfolio
 
-My personal portfolio site, showcasing my background, experience, and projects in Software Development, AI/ML, and Data Analysis.
+My personal portfolio site: software engineer building backend services and AI applications.
 
 **Live site:** https://PradeepG01.github.io
 
-## About
+## What's on it
 
-A single-page portfolio built with plain HTML, CSS, and JavaScript — no framework, no build step. Sections include:
+A single-page site in plain HTML, CSS and JavaScript — no framework, no build step.
 
-- **Hero** — intro, role, and quick-glance stats (internships, shipped projects, model performance, partnership secured)
-- **About** — background and location
+- **Hero** — an animated request trace that walks through how my projects process a request
+- **About** — background and quick facts
+- **Projects** — all my GitHub repos, filterable and expandable:
+  - [ai-support-agent](https://github.com/PradeepG01/ai-support-agent) — LLM support agent with RAG and tool calling
+  - [kyc-orchestrator](https://github.com/PradeepG01/kyc-orchestrator) — fintech verification microservice
+  - [defect-vision](https://github.com/PradeepG01/defect-vision) — industrial defect inspection with PyTorch and OpenCV
+  - [shipment-tracking-service](https://github.com/PradeepG01/shipment-tracking-service) — Spring Boot logistics API
+  - [finance-tracker-api](https://github.com/PradeepG01/finance-tracker-api) — Node.js finance REST API
+  - [credit-risk-prediction](https://github.com/PradeepG01/credit-risk-prediction) — credit default model
+  - [fintech-analytics-dashboard](https://github.com/PradeepG01/fintech-analytics-dashboard) — Streamlit transactions dashboard
 - **Experience** — work history
-- **Projects** — links to my GitHub repos:
-  - [finance-tracker-api](https://github.com/PradeepG01/finance-tracker-api)
-  - [credit-risk-prediction](https://github.com/PradeepG01/credit-risk-prediction)
-  - [fintech-analytics-dashboard](https://github.com/PradeepG01/fintech-analytics-dashboard)
-- **Skills** — technical skill set
-- **Education** — degree and institution
-- **Contact** — email, phone, LinkedIn, and downloadable résumé
+- **Skills, certifications and education**
+- **Contact** — email, phone, LinkedIn and a downloadable resume (`G_Pradeep_Kumar_Resume.pdf`)
 
-## Tech Stack
+Animations respect the "reduce motion" system setting, and the layout works down to phone widths.
 
-- HTML5, CSS3, vanilla JavaScript
-- Google Fonts (Space Grotesk, Inter, JetBrains Mono)
-- No dependencies, no build process — just static files
-
-## Running Locally
-
-Clone the repo and open `index.html` directly in a browser, or serve it locally:
+## Running locally
 
 ```
 python3 -m http.server 8000
@@ -37,7 +34,7 @@ Then visit `http://localhost:8000`.
 
 ## Deployment
 
-Hosted for free via GitHub Pages, served directly from the `main` branch of this repo.
+Hosted on GitHub Pages from the `main` branch.
 
 ## Contact
 
