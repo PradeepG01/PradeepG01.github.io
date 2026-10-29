@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#06120D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     /* greens, darkest to lightest */
@@ -32,8 +32,8 @@
     --text:#ECF4EE;
     --muted:#A4BBAD;
     --dim:#6E8C7C;
-    --serif:'Instrument Serif', Georgia, serif;
-    --sans:'Manrope', system-ui, sans-serif;
+    --serif:'Unbounded', system-ui, sans-serif;
+    --sans:'Figtree', system-ui, sans-serif;
     --maxw:1180px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -46,7 +46,7 @@
   }
   a{color:inherit;}
   h1,h2,h3{margin:0; line-height:1.08;}
-  h1,h2{font-family:var(--serif); font-weight:400; letter-spacing:-.01em;}
+  h1,h2{font-family:var(--serif); font-weight:600; letter-spacing:-.035em;}
   h3{font-family:var(--sans); font-weight:700; letter-spacing:-.015em;}
   p{margin:0;}
   ul,ol{margin:0; padding:0;}
@@ -81,7 +81,7 @@
   .brand{font-weight:700; font-size:17px; text-decoration:none; display:flex; align-items:center; gap:11px; letter-spacing:-.01em;}
   .brand-mark{
     width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
-    font-family:var(--serif); font-size:17px; color:var(--gold);
+    font-family:var(--serif); font-size:12px; font-weight:700; letter-spacing:-.04em; color:var(--gold);
     background:radial-gradient(circle at 30% 25%, #1E5A43, #0B2219 70%);
     border:1px solid rgba(227,194,126,.45);
   }
@@ -116,7 +116,7 @@
   .pulse{width:8px; height:8px; border-radius:50%; background:var(--lime); position:relative; flex-shrink:0;}
   .pulse::after{content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--lime); opacity:0; animation:ping 2.4s var(--ease) infinite;}
   @keyframes ping{0%{transform:scale(.6); opacity:.8;} 100%{transform:scale(1.9); opacity:0;}}
-  .hero h1{margin-top:24px; font-size:clamp(64px,10vw,132px); line-height:.9; letter-spacing:-.025em;}
+  .hero h1{margin-top:24px; font-size:clamp(44px,6.6vw,88px); font-weight:700; line-height:.98; letter-spacing:-.05em;}
   .hero h1 .ln{display:block; overflow:hidden; padding-bottom:.08em;}
   .hero h1 .ln > span{display:inline-block;}
   .hero h1 .ln:last-child > span{
@@ -133,7 +133,7 @@
   .facts{margin-top:46px; display:grid; grid-template-columns:repeat(4,auto); justify-content:start; gap:0; border-top:1px solid var(--line); padding-top:22px;}
   .facts div{padding-right:28px; margin-right:28px; border-right:1px solid var(--line);}
   .facts div:last-child{border-right:none; margin-right:0; padding-right:0;}
-  .facts strong{display:block; font-family:var(--serif); font-weight:400; font-size:38px; line-height:1; color:var(--mint);}
+  .facts strong{display:block; font-family:var(--serif); font-weight:600; letter-spacing:-.04em; font-size:30px; line-height:1; color:var(--mint);}
   .facts span{display:block; font-size:13px; color:var(--dim); margin-top:6px;}
 
   /* load sequence */
@@ -159,7 +159,7 @@
   @property --ang{syntax:'<angle>'; inherits:false; initial-value:0deg;}
   @keyframes spin{to{--ang:360deg;}}
   .trace-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:16px; border-bottom:1px solid var(--line-2);}
-  .trace-title{font-family:var(--serif); font-size:26px; line-height:1.1;}
+  .trace-title{font-family:var(--serif); font-size:19px; font-weight:600; letter-spacing:-.03em; line-height:1.2;}
   .trace-sub{font-size:13px; color:var(--dim); margin-top:3px;}
   .status{
     font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;
@@ -195,20 +195,62 @@
   .steps.swap{animation:swap .45s var(--ease);}
   @keyframes swap{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
 
+  /* ---------- hero character ---------- */
+  .buddy{position:relative; display:flex; flex-direction:column; align-items:center;}
+  .buddy-btn{
+    display:block; width:100%; max-width:480px; padding:0; margin:0; border:0; background:none; cursor:pointer;
+    border-radius:50%; -webkit-tap-highlight-color:transparent;
+  }
+  .buddy-btn:focus-visible{outline-offset:-14px; border-radius:50%;}
+  .buddy-btn svg{display:block; width:100%; height:auto; overflow:visible;}
+  .buddy .ring{transform-origin:210px 250px; animation:ringspin 60s linear infinite;}
+  @keyframes ringspin{to{transform:rotate(360deg);}}
+  .buddy .person{transform-origin:210px 500px; animation:breathe 4.5s ease-in-out infinite;}
+  @keyframes breathe{50%{transform:scaleY(1.012) translateY(-2px);}}
+  .buddy .head{transform-box:view-box; transform-origin:210px 300px;}
+  .buddy .eyes{transform-box:fill-box; transform-origin:center; transition:transform .09s ease-in;}
+  .buddy .eyes.blink{transform:scaleY(.08);}
+  .buddy .brows{transition:transform .25s var(--ease);}
+  .buddy .mouth-grin{opacity:0; transition:opacity .2s;}
+  .buddy .mouth-calm{transition:opacity .2s;}
+  .buddy .cheek{transition:opacity .3s;}
+  .buddy .badge{animation:floaty 6s ease-in-out infinite;}
+  .buddy .b2{animation-delay:-1.5s;} .buddy .b3{animation-delay:-3s;} .buddy .b4{animation-delay:-4.5s;}
+  @keyframes floaty{50%{transform:translateY(-10px);}}
+  .buddy-btn:hover .brows, .buddy.happy .brows{transform:translateY(-5px);}
+  .buddy.happy .mouth-grin{opacity:1;}
+  .buddy.happy .mouth-calm{opacity:0;}
+  .buddy.happy .cheek{opacity:.45;}
+  .buddy.hop .person{animation:hop .6s var(--ease);}
+  @keyframes hop{30%{transform:translateY(-14px) rotate(-1.5deg);} 60%{transform:translateY(0) rotate(1deg);} 100%{transform:none;}}
+  .bubble{
+    position:absolute; top:2%; left:-2%; z-index:2; max-width:220px;
+    background:var(--text); color:#06120D; font-weight:700; font-size:15px; line-height:1.35;
+    padding:12px 16px; border-radius:18px 18px 18px 4px;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.7);
+    transform-origin:bottom left; transition:transform .35s var(--ease), opacity .35s;
+  }
+  .bubble.pop{animation:pop .45s var(--ease);}
+  @keyframes pop{0%{transform:scale(.6); opacity:0;} 100%{transform:none; opacity:1;}}
+  .buddy-hint{margin-top:6px; font-size:13.5px; color:var(--dim); font-weight:500;}
+
+  /* ---------- demo section ---------- */
+  .demo-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center;}
+
   /* ---------- ticker ---------- */
   .ticker{border-block:1px solid var(--line); background:rgba(11,29,22,.55); overflow:hidden; padding:20px 0;}
   .ticker-track{display:flex; gap:40px; width:max-content; animation:tick 55s linear infinite;}
   .ticker:hover .ticker-track{animation-play-state:paused;}
-  .ticker-track span{font-family:var(--serif); font-size:26px; color:var(--sage); white-space:nowrap; display:flex; align-items:center; gap:40px;}
+  .ticker-track span{font-family:var(--serif); font-size:19px; font-weight:500; letter-spacing:-.03em; color:var(--sage); white-space:nowrap; display:flex; align-items:center; gap:40px;}
   .ticker-track span:nth-child(3n+2){color:var(--jade);}
-  .ticker-track span:nth-child(3n){font-style:italic; color:var(--gold);}
+  .ticker-track span:nth-child(3n){color:var(--gold);}
   .ticker-track span::after{content:"✦"; font-family:var(--sans); font-size:14px; color:var(--emerald); font-style:normal;}
   @keyframes tick{to{transform:translateX(-50%);}}
 
   /* ---------- sections ---------- */
   .block{padding:110px 0;}
   .head{max-width:660px; margin-bottom:46px;}
-  .head h2{font-size:clamp(44px,6vw,76px); line-height:.98;}
+  .head h2{font-size:clamp(32px,4.4vw,56px); line-height:1.04;}
   .head p{margin-top:16px; color:var(--muted); font-size:17px;}
   .js .reveal{opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
   .js .reveal.in{opacity:1; transform:none;}
@@ -257,14 +299,14 @@
   .proj-card{position:relative; padding:28px; display:flex; flex-direction:column; gap:16px;}
   .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px;}
   .proj h3{font-size:22px;}
-  .proj.feat h3{font-family:var(--serif); font-weight:400; font-size:36px; letter-spacing:-.01em; line-height:1.02;}
+  .proj.feat h3{font-family:var(--serif); font-weight:600; font-size:25px; letter-spacing:-.035em; line-height:1.15;}
   .tag-new{font-size:12px; font-weight:700; color:var(--lime); background:rgba(198,240,106,.12); border:1px solid rgba(198,240,106,.3); padding:3px 10px; border-radius:999px; white-space:nowrap;}
   .proj p.desc{color:var(--muted); font-size:15.5px;}
   .chips{display:flex; flex-wrap:wrap; gap:7px;}
   .chip{font-size:12.5px; font-weight:500; color:#CFE3D6; background:rgba(26,58,45,.7); border:1px solid var(--line-2); padding:4px 11px; border-radius:999px;}
   .proj-foot{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-top:18px; margin-top:4px; border-top:1px solid var(--line);}
-  .result .big{font-family:var(--serif); font-size:46px; line-height:.95; color:var(--mint);}
-  .proj:not(.feat) .result .big{font-size:36px;}
+  .result .big{font-family:var(--serif); font-weight:600; letter-spacing:-.04em; font-size:36px; line-height:1; color:var(--mint);}
+  .proj:not(.feat) .result .big{font-size:28px;}
   .proj:not(.feat) .proj-foot{flex-direction:column; align-items:flex-start;}
   .proj:not(.feat) .result .lbl{max-width:none;}
   .proj.feat:nth-child(2) .result .big{color:var(--teal);}
@@ -288,7 +330,7 @@
   .proj-more ul{list-style:none; margin:0 28px 26px; padding-top:18px; border-top:1px dashed var(--line-2); display:flex; flex-direction:column; gap:10px;}
   .proj-more li{position:relative; padding-left:22px; color:var(--muted); font-size:14.5px;}
   .proj-more li::before{content:"✦"; position:absolute; left:0; top:0; font-size:12px; color:var(--jade);}
-  .earlier{grid-column:1 / -1; display:flex; align-items:center; gap:16px; margin:26px 0 4px; font-family:var(--serif); font-size:26px; color:var(--sage);}
+  .earlier{grid-column:1 / -1; display:flex; align-items:center; gap:16px; margin:26px 0 4px; font-family:var(--serif); font-size:18px; font-weight:500; letter-spacing:-.03em; color:var(--sage);}
   .earlier::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line-2),transparent);}
   .earlier.hide{display:none;}
 
@@ -304,7 +346,7 @@
   .tl-line{flex:1; width:1px; background:linear-gradient(var(--jade),var(--line)); margin-top:8px; opacity:.7;}
   .tl:last-child .tl-line{display:none;}
   .tl-body{padding-left:14px;}
-  .tl-body h3{font-family:var(--serif); font-weight:400; font-size:34px; letter-spacing:-.005em;}
+  .tl-body h3{font-family:var(--serif); font-weight:600; font-size:24px; letter-spacing:-.035em; line-height:1.2;}
   .tl-body .org{display:block; color:var(--gold); font-weight:600; margin-top:6px;}
   .tl-body ul{list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:9px;}
   .tl-body li{position:relative; padding-left:22px; color:var(--muted); max-width:44em;}
@@ -314,13 +356,13 @@
   .skills{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
   .sk{border-radius:22px; padding:26px; background:linear-gradient(165deg,rgba(17,40,31,.8),rgba(11,29,22,.85)); border:1px solid var(--line);}
   .sk.wide{grid-column:span 2;}
-  .sk h3{font-family:var(--serif); font-weight:400; font-size:26px; margin-bottom:16px; display:flex; align-items:center; gap:12px;}
+  .sk h3{font-family:var(--serif); font-weight:600; letter-spacing:-.03em; font-size:17px; margin-bottom:16px; display:flex; align-items:center; gap:12px;}
   .sk h3::before{content:""; width:10px; height:10px; border-radius:50%; background:var(--c,var(--jade)); box-shadow:0 0 14px var(--c,var(--jade));}
   .sk .chip{font-size:14px; padding:6px 13px;}
 
   /* ---------- certs + education ---------- */
   .two{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
-  .two h2{font-size:clamp(40px,4.6vw,58px); margin-bottom:26px;}
+  .two h2{font-size:clamp(30px,3.6vw,44px); margin-bottom:26px;}
   .clist{list-style:none; display:flex; flex-direction:column;}
   .clist li{display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:19px 0; border-bottom:1px solid var(--line);}
   .clist li:first-child{padding-top:0;}
@@ -339,7 +381,7 @@
     transform:translateX(-50%); background:radial-gradient(closest-side,rgba(79,224,166,.35),transparent); pointer-events:none;
   }
   .cta::after{content:""; position:absolute; top:0; left:15%; right:15%; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-  .cta h2{font-size:clamp(48px,7.4vw,96px); line-height:.95;}
+  .cta h2{font-size:clamp(34px,5.6vw,72px); line-height:1.02;}
   .cta p{color:#C6DACD; margin:18px auto 0; max-width:34em; font-size:17px;}
   .cta-actions{margin-top:34px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
   .copy{
@@ -359,6 +401,8 @@
   /* ---------- responsive ---------- */
   @media (max-width:980px){
     .hero-grid{grid-template-columns:1fr; gap:48px;}
+    .buddy{max-width:460px; margin:0 auto; width:100%;}
+    .demo-grid{grid-template-columns:1fr; gap:36px;}
     .about{grid-template-columns:1fr; gap:36px;}
     .plist{grid-template-columns:1fr 1fr;}
     .proj, .proj.feat{grid-column:span 1;}
@@ -381,14 +425,14 @@
     .facts div{margin-right:0; padding-right:0; border-right:none;}
     .plist{grid-template-columns:1fr;}
     .proj-card{padding:24px 22px;}
-    .proj.feat h3{font-size:32px;}
+    .proj.feat h3{font-size:22px;}
     .proj-foot{flex-direction:column; align-items:flex-start;}
     .proj-more ul{margin:0 22px 22px;}
     .tl{grid-template-columns:22px 1fr; row-gap:4px;}
     .tl-date{grid-column:2; grid-row:1; padding-left:14px;}
     .tl-rail{grid-column:1; grid-row:1 / span 2;}
     .tl-body{grid-column:2; grid-row:2;}
-    .tl-body h3{font-size:30px;}
+    .tl-body h3{font-size:21px;}
     .skills{grid-template-columns:1fr;}
     .sk.wide{grid-column:auto;}
     .cta{padding:56px 22px; border-radius:24px;}
@@ -451,7 +495,145 @@
         </div>
       </div>
 
-      <div class="trace seq" style="--d:.42s" aria-label="Animated walkthrough of how my projects process a request">
+      <div class="buddy seq" style="--d:.35s">
+        <div class="bubble" id="bubble" role="status" aria-live="polite">Hey! I'm Pradeep 👋</div>
+        <button type="button" class="buddy-btn" id="buddy" aria-label="Illustrated character of Pradeep with arms crossed. Tap for a message.">
+          <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="bgGlow" cx="50%" cy="42%" r="60%">
+                <stop offset="0" stop-color="#1F6B4C"/><stop offset=".65" stop-color="#0F3527"/><stop offset="1" stop-color="#0A2219"/>
+              </radialGradient>
+              <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#26B57C"/><stop offset="1" stop-color="#137A53"/>
+              </linearGradient>
+              <linearGradient id="sleeveBack" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1A925F"/><stop offset="1" stop-color="#106B48"/>
+              </linearGradient>
+              <linearGradient id="sleeveFront" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#34C98D"/><stop offset="1" stop-color="#1C9965"/>
+              </linearGradient>
+              <clipPath id="disc"><circle cx="210" cy="250" r="176"/><rect x="34" y="250" width="352" height="270"/></clipPath>
+              <linearGradient id="fadeG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="420" height="520"><rect x="0" y="0" width="420" height="520" fill="url(#fadeG)"/></mask>
+            </defs>
+
+            <!-- backdrop -->
+            <circle class="ring" cx="210" cy="250" r="194" fill="none" stroke="#E3C27E" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/>
+            <circle cx="210" cy="250" r="176" fill="url(#bgGlow)"/>
+            <circle cx="210" cy="250" r="176" fill="none" stroke="#4FE0A6" stroke-opacity=".25"/>
+
+            <g clip-path="url(#disc)" mask="url(#fade)">
+              <!-- the person -->
+              <g transform="translate(0 -14)"><g class="person">
+                <!-- torso -->
+                <path d="M74 520 C78 418 118 356 210 350 C302 356 342 418 346 520 Z" fill="url(#hoodie)"/>
+                <!-- hood around neck -->
+                <path d="M150 362 C168 338 252 338 270 362 C252 384 168 384 150 362 Z" fill="#0F5E40"/>
+                <path d="M178 352 L210 392 L242 352 Z" fill="#0B2A1F"/>
+                <!-- neck -->
+                <rect x="187" y="300" width="46" height="58" rx="18" fill="#B07150"/>
+                <path d="M187 326 C201 338 219 338 233 326 L233 308 L187 308 Z" fill="#94593C" opacity=".7"/>
+                <!-- hoodie strings -->
+                <path d="M196 384 L194 412" stroke="#E3C27E" stroke-width="3" stroke-linecap="round"/>
+                <path d="M224 384 L226 412" stroke="#E3C27E" stroke-width="3" stroke-linecap="round"/>
+
+                <!-- upper arms -->
+                <path d="M96 420 C96 386 112 368 138 362 L150 452 C124 462 100 452 96 420 Z" fill="#168557"/>
+                <path d="M324 420 C324 386 308 368 282 362 L270 452 C296 462 320 452 324 420 Z" fill="#168557"/>
+
+                <!-- crossed arms: back forearm -->
+                <g class="arms">
+                  <rect x="104" y="404" width="212" height="48" rx="24" fill="url(#sleeveBack)" transform="rotate(-7 210 428)"/>
+                  <!-- hand peeking on the left, gripping the bicep -->
+                  <g transform="rotate(-10 124 404)">
+                    <rect x="104" y="388" width="36" height="34" rx="15" fill="#C1825E"/>
+                    <path d="M110 396 h22 M110 404 h24 M110 412 h20" stroke="#94593C" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+                  </g>
+                  <!-- front forearm -->
+                  <rect x="100" y="424" width="220" height="50" rx="25" fill="url(#sleeveFront)" transform="rotate(6 210 449)"/>
+                  <rect x="282" y="440" width="12" height="44" rx="5" fill="#137A53" transform="rotate(6 210 449)"/>
+                  <!-- hand tucked on the right -->
+                  <g transform="rotate(14 300 440)">
+                    <rect x="290" y="418" width="36" height="36" rx="16" fill="#C1825E"/>
+                    <path d="M298 426 h20 M298 434 h22 M298 442 h18" stroke="#94593C" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+                  </g>
+                  <!-- watch -->
+                  <rect x="276" y="430" width="14" height="22" rx="4" fill="#0B2A1F" transform="rotate(6 210 449)"/>
+                  <rect x="279" y="434" width="8" height="14" rx="2" fill="#C6F06A" transform="rotate(6 210 449)"/>
+                </g>
+
+                <!-- head (moves with the cursor) -->
+                <g transform="translate(0 12)"><g class="head" id="head">
+                  <ellipse cx="150" cy="248" rx="13" ry="19" fill="#B07150"/>
+                  <ellipse cx="270" cy="248" rx="13" ry="19" fill="#B07150"/>
+                  <ellipse cx="210" cy="240" rx="61" ry="72" fill="#C1825E"/>
+                  <!-- jaw shadow / stubble -->
+                  <path d="M152 262 C160 310 186 314 210 314 C234 314 260 310 268 262 C258 296 236 300 210 300 C184 300 162 296 152 262 Z" fill="#3A2418" opacity=".22"/>
+                  <!-- hair -->
+                  <path d="M146 236 C134 176 168 150 214 150 C262 150 290 178 276 236 C272 214 262 200 248 194 C232 204 196 204 178 192 C164 204 152 216 146 236 Z" fill="#1A120D"/>
+                  <path d="M176 172 C192 140 246 136 264 164 C246 152 210 150 176 172 Z" fill="#2B1E16"/>
+                  <!-- brows -->
+                  <g class="brows" id="brows">
+                    <path d="M166 210 C176 203 192 203 200 208" stroke="#1A120D" stroke-width="6" stroke-linecap="round" fill="none"/>
+                    <path d="M220 208 C228 203 244 203 254 210" stroke="#1A120D" stroke-width="6" stroke-linecap="round" fill="none"/>
+                  </g>
+                  <!-- eyes -->
+                  <g class="eyes" id="eyes">
+                    <ellipse cx="184" cy="236" rx="11" ry="9" fill="#F6FBF7"/>
+                    <ellipse cx="236" cy="236" rx="11" ry="9" fill="#F6FBF7"/>
+                    <g id="pupils">
+                      <circle cx="184" cy="236" r="5.5" fill="#1A120D"/>
+                      <circle cx="236" cy="236" r="5.5" fill="#1A120D"/>
+                      <circle cx="186" cy="234" r="1.8" fill="#fff"/>
+                      <circle cx="238" cy="234" r="1.8" fill="#fff"/>
+                    </g>
+                  </g>
+                  <!-- glasses -->
+                  <g fill="rgba(167,243,207,.07)" stroke="#0B2A1F" stroke-width="4">
+                    <rect x="162" y="219" width="44" height="34" rx="12"/>
+                    <rect x="214" y="219" width="44" height="34" rx="12"/>
+                  </g>
+                  <path d="M206 233 C208 230 212 230 214 233" stroke="#0B2A1F" stroke-width="4" fill="none"/>
+                  <path d="M162 232 L150 228 M258 232 L270 228" stroke="#0B2A1F" stroke-width="4" stroke-linecap="round"/>
+                  <!-- nose -->
+                  <path d="M210 244 C206 258 204 264 212 266" stroke="#94593C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                  <!-- mouth: calm smile and big grin -->
+                  <path class="mouth-calm" d="M190 282 C202 292 220 292 232 281" stroke="#5A2E1E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                  <path class="mouth-grin" d="M186 278 C198 300 222 300 234 278 Z" fill="#5A2E1E"/>
+                  <path class="mouth-grin" d="M192 280 C204 286 216 286 228 280 L228 283 C216 289 204 289 192 283 Z" fill="#F6FBF7"/>
+                  <!-- cheeks -->
+                  <ellipse class="cheek" cx="168" cy="270" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
+                  <ellipse class="cheek" cx="252" cy="270" rx="10" ry="6" fill="#E07A6B" opacity="0"/>
+                </g></g>
+              </g></g>
+            </g>
+
+            <!-- floating badges -->
+            <g class="badge b1"><rect x="20" y="96" width="86" height="40" rx="20" fill="#0B1D16" stroke="#4FE0A6" stroke-opacity=".6"/><text x="63" y="122" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#A7F3CF">&lt;/&gt; API</text></g>
+            <g class="badge b2"><rect x="318" y="72" width="80" height="40" rx="20" fill="#0B1D16" stroke="#E3C27E" stroke-opacity=".7"/><text x="358" y="98" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#E3C27E">✦ AI</text></g>
+            <g class="badge b3"><rect x="326" y="318" width="84" height="40" rx="20" fill="#0B1D16" stroke="#38B6C1" stroke-opacity=".7"/><text x="368" y="344" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#7FDDE5">{ SQL }</text></g>
+            <g class="badge b4"><rect x="8" y="330" width="86" height="40" rx="20" fill="#0B1D16" stroke="#C6F06A" stroke-opacity=".6"/><text x="51" y="356" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="15" fill="#C6F06A">✓ CI</text></g>
+          </svg>
+        </button>
+        <p class="buddy-hint" aria-hidden="true">Move your cursor — tap him to chat</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <!-- DEMO -->
+  <section class="block demo" id="demo">
+    <div class="wrap demo-grid">
+      <div class="head reveal" style="margin-bottom:0;">
+        <h2>Watch a request move through my code.</h2>
+        <p>Each of my four newest projects, step by step — from the request coming in to the result going out. Pick a project to replay it.</p>
+      </div>
+      <div class="trace reveal" aria-label="Animated walkthrough of how my projects process a request">
         <div class="trace-head">
           <div>
             <div class="trace-title" id="traceTitle">AI Support Agent</div>
@@ -470,12 +652,8 @@
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track" id="ticker"></div>
-  </div>
-
   <!-- ABOUT -->
-  <section class="block" id="about">
+  <section class="block" id="about" style="padding-top:20px;">
     <div class="wrap about">
       <div class="about-text reveal">
         <div class="head" style="margin-bottom:28px;"><h2>Code that ships, backed by data.</h2></div>
@@ -803,6 +981,61 @@
     if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
   }), {rootMargin:'0px 0px -8% 0px'}) : null;
   document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+  // hero character: follows the cursor, blinks, reacts to taps
+  (function(){
+    const buddy = document.querySelector('.buddy'), btn = document.getElementById('buddy');
+    const svg = btn.querySelector('svg'), head = document.getElementById('head');
+    const pupils = document.getElementById('pupils'), eyes = document.getElementById('eyes'), brows = document.getElementById('brows');
+    const bubble = document.getElementById('bubble');
+    const LINES = [
+      "Hey! I'm Pradeep 👋",
+      "I build backend services and AI apps.",
+      "My AI agent passes 18/18 evals. Not bad, right?",
+      "Java, TypeScript, Python — pick one.",
+      "Open to software, AI/ML and data roles.",
+      "Psst… my resume is one click away ↓",
+      "Scroll down — all 7 projects are there."
+    ];
+    let line = 0, tx = 0, ty = 0, cx = 0, cy = 0, lastMove = 0, idleT = 0;
+    if (!fine) document.querySelector('.buddy-hint').textContent = 'Tap him to chat';
+
+    function aim(clientX, clientY){
+      const r = svg.getBoundingClientRect();
+      const hx = r.left + r.width * .5, hy = r.top + r.height * .47;
+      const dx = (clientX - hx) / (innerWidth * .5), dy = (clientY - hy) / (innerHeight * .5);
+      tx = Math.max(-1, Math.min(1, dx)); ty = Math.max(-1, Math.min(1, dy));
+      lastMove = performance.now();
+    }
+    addEventListener('pointermove', e => aim(e.clientX, e.clientY), {passive:true});
+    addEventListener('pointerdown', e => aim(e.clientX, e.clientY), {passive:true});
+
+    function frame(t){
+      if (t - lastMove > 4000 && t > idleT){ // idle: glance somewhere new
+        tx = (Math.random() * 2 - 1) * .7; ty = (Math.random() * 2 - 1) * .4; idleT = t + 1800 + Math.random() * 2200;
+      }
+      cx += (tx - cx) * .12; cy += (ty - cy) * .12;
+      head.setAttribute('transform', `translate(${cx * 7} ${cy * 3}) rotate(${cx * 4} 210 300)`);
+      pupils.setAttribute('transform', `translate(${cx * 5} ${cy * 3.5})`);
+      brows.style.translate = `${cx * 2}px ${cy * 1.5}px`;
+      requestAnimationFrame(frame);
+    }
+    if (!reduced) requestAnimationFrame(frame);
+
+    (function blink(){
+      if (!reduced){ eyes.classList.add('blink'); setTimeout(() => eyes.classList.remove('blink'), 130); }
+      setTimeout(blink, 2600 + Math.random() * 3200);
+    })();
+
+    let happyT;
+    btn.addEventListener('click', () => {
+      line = (line + 1) % LINES.length;
+      bubble.textContent = LINES[line];
+      bubble.classList.remove('pop'); void bubble.offsetWidth; bubble.classList.add('pop');
+      buddy.classList.remove('hop'); void buddy.offsetWidth; buddy.classList.add('hop', 'happy');
+      clearTimeout(happyT); happyT = setTimeout(() => buddy.classList.remove('happy'), 1600);
+    });
+  })();
 
   // hero trace
   const TRACES = [
