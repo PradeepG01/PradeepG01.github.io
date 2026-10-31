@@ -40,5 +40,5 @@ Hosted on GitHub Pages from the `main` branch.
 ## Contact
 
 - Email: Gpradeepkumar0501@gmail.com
-- LinkedIn: [g-pradeep-kumar-0a8709331](https://linkedin.com/in/g-pradeep-kumar-0a8709331)
+- LinkedIn: [gpradeepkumar-dev](https://www.linkedin.com/in/gpradeepkumar-dev)
 - GitHub: [@PradeepG01](https://github.com/PradeepG01)
