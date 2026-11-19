@@ -165,31 +165,55 @@ function layout(){const W=innerWidth,H=$('stage').clientHeight;const c=Math.max(
 const dots=[...document.querySelectorAll('.dot')],cards=[...document.querySelectorAll('.card')];
 
 /* ---------- stop-by-stop navigation ---------- */
-let idx=0,pos=0,tw=null,arrivedAt=performance.now(),moved=false;
+let idx=0,pos=0,tw=null,arrivedAt=performance.now(),moved=false,queued=0,cooldownUntil=0;
 function go(n){n=Math.max(0,Math.min(N-1,n));if(n===idx||tw)return;
-  hideTip(true);const from=pos,dur=1500*Math.sqrt(Math.abs(n-idx));tw={from,to:n,t0:performance.now(),dur};idx=n;
+  hideTip(true);const from=pos,dur=1150*Math.sqrt(Math.abs(n-idx));tw={from,to:n,t0:performance.now(),dur};idx=n;
   if(!moved){moved=true;$('hint').style.opacity=0}}
-function toEnd(){window.scrollTo({top:$('end').offsetTop,behavior:'smooth'})}
-function step(dir){if(tw)return;if(dir>0){idx<N-1?go(idx+1):toEnd()}else if(idx>0)go(idx-1)}
+const endTop=()=>$('end').offsetTop;
+function toEnd(){window.scrollTo({top:endTop(),behavior:'smooth'})}
+function toRide(){window.scrollTo({top:0,behavior:'smooth'})}
+function step(dir){
+  if(tw){ // a gesture late in a move is remembered and runs on arrival (max one)
+    if((performance.now()-tw.t0)/tw.dur>.12)queued=dir;return}
+  if(dir>0){idx<N-1?go(idx+1):toEnd()}else if(idx>0)go(idx-1)}
 const atRide=()=>window.scrollY<4;
+const between=()=>window.scrollY>=4&&window.scrollY<endTop()-4;
 
-// wheel / trackpad: one gesture = one stop
-let lastWheel=0,gestureSpent=false;
-addEventListener('wheel',e=>{if(!atRide())return;
-  // let the user scroll back up into the ride naturally; at the ride, own the wheel
-  e.preventDefault();const now=performance.now();const gap=now-lastWheel;lastWheel=now;
-  if(gap>220)gestureSpent=false;           // a pause = a new deliberate gesture
-  if(gestureSpent||tw||Math.abs(e.deltaY)<3)return;
-  gestureSpent=true;step(Math.sign(e.deltaY))},{passive:false});
-// touch: one swipe = one stop
-let ty=null;
-$('stage').addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
-$('stage').addEventListener('touchmove',e=>{if(atRide())e.preventDefault()},{passive:false});
-$('stage').addEventListener('touchend',e=>{if(ty===null)return;const dy=ty-e.changedTouches[0].clientY;ty=null;if(Math.abs(dy)>35)step(Math.sign(dy))});
+// wheel / trackpad: one deliberate gesture = one stop
+let lastWheel=0,lastAbs=0,spent=false,needPause=false;
+addEventListener('wheel',e=>{
+  if(!atRide())return;                       // contact section scrolls normally
+  e.preventDefault();
+  const now=performance.now(),gap=now-lastWheel,abs=Math.abs(e.deltaY);lastWheel=now;
+  const rising=abs>lastAbs*1.4+4;lastAbs=abs;   // inertia only ever decays; a rise = a new push
+  if(abs<4||now<cooldownUntil)return;
+  const notch=e.deltaMode===1||(abs>=100&&(abs%100===0||abs%120===0));   // classic mouse-wheel clicks
+  if(gap>180)needPause=false;
+  if(needPause)return;
+  if(gap>180||rising||(notch&&!tw&&now-arrivedAt>120))spent=false;
+  if(spent)return;
+  spent=true;step(Math.sign(e.deltaY))},{passive:false});
+
+// touch: one swipe = one stop; never leaves the page half-way between ride and contact
+let ty=null,tStartRide=true;
+$('stage').addEventListener('touchstart',e=>{ty=e.touches[0].clientY;tStartRide=atRide()},{passive:true});
+$('stage').addEventListener('touchmove',e=>{e.preventDefault()},{passive:false});
+$('stage').addEventListener('touchend',e=>{if(ty===null)return;const dy=ty-e.changedTouches[0].clientY;ty=null;
+  if(Math.abs(dy)<35)return;
+  if(!tStartRide||!atRide()){dy>0?toEnd():toRide();return}
+  step(Math.sign(dy))});
+
 // keys
 addEventListener('keydown',e=>{if(!atRide())return;
   if(['ArrowDown','PageDown',' ','ArrowRight'].includes(e.key)){e.preventDefault();step(1)}
   if(['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){e.preventDefault();step(-1)}});
+
+// coming back up from contact: short cooldown so leftover scroll doesn't skip a stop;
+// if the page is left resting half-way, snap to the nearest side
+let wasRide=true,snapT=null;
+addEventListener('scroll',()=>{const r=atRide();if(r&&!wasRide){cooldownUntil=performance.now()+300;spent=true;needPause=true}wasRide=r;
+  clearTimeout(snapT);snapT=setTimeout(()=>{if(between())(window.scrollY>endTop()/2?toEnd:toRide)()},220)},{passive:true});
+
 // route map jump
 $('dots').addEventListener('click',e=>{const i=e.target.dataset.i;if(i!==undefined)go(+i)});
 $('skip').addEventListener('click',e=>{e.preventDefault();toEnd()});
@@ -228,7 +252,7 @@ function drawRain(){const W=innerWidth,H=$('stage').clientHeight;ctx.clearRect(0
 
 /* ---------- render loop ---------- */
 function render(now){
-  if(tw){const t=clamp((now-tw.t0)/tw.dur);pos=tw.from+(tw.to-tw.from)*ease(t);if(t>=1){pos=tw.to;tw=null;arrivedAt=now}}
+  if(tw){const t=clamp((now-tw.t0)/tw.dur);pos=tw.from+(tw.to-tw.from)*ease(t);if(t>=1){pos=tw.to;tw=null;arrivedAt=now;if(queued){const q=queued;queued=0;step(q)}}}
   const near=Math.round(pos),hold=clamp(1-Math.abs(pos-near)*6);speed=1-hold;
   const dwell=tw?0:clamp((now-arrivedAt)/9000);
   scenes.forEach((s,k)=>{const d=k-pos;
