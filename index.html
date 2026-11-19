@@ -8,11 +8,14 @@
 <meta property="og:title" content="G Pradeep Kumar — Portfolio">
 <meta property="og:description" content="Ride the metro through my journey: education, experience, projects and certifications.">
 <meta property="og:image" content="https://pradeepg01.github.io/img/s0.webp">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@500;600&family=VT323&display=swap" rel="stylesheet">
 <style>
 :root{--amber:#ffb547;--purple:#8b4fd6;--ink:#f4eff9;--dim:#b9b0c8;--bg:#07060b}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif}
+html,body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif}
+#hero h1,.card h2,#tip h3,#end h2{font-family:'Syne','Manrope',sans-serif;letter-spacing:-.01em}
+.card h2{font-weight:700}#tip h3{font-weight:700}#end h2{font-weight:700}
+.kn{font-family:'Noto Sans Kannada',sans-serif;font-weight:600;letter-spacing:0;text-shadow:none}
 body{overflow-x:clip;overscroll-behavior:none}
 .led{font-family:'VT323',monospace;color:var(--amber);text-shadow:0 0 8px rgba(255,181,71,.65);letter-spacing:.06em}
 #stage{position:relative;height:100vh;height:100svh;overflow:hidden;overflow:clip;background:#000;touch-action:none}
@@ -36,7 +39,7 @@ body{overflow-x:clip;overscroll-behavior:none}
 .frame{position:absolute;left:50%;top:50%;background-size:100% 100%;transform-origin:center}
 .bb{position:absolute;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#fff;font-family:'VT323',monospace;line-height:1;text-shadow:0 0 12px rgba(255,255,255,.7);opacity:0;transition:opacity .4s}
 .bb b{font-weight:400;font-size:var(--bf,28px);letter-spacing:.04em;line-height:.9}
-.bb small{font-family:'Space Grotesk';font-size:calc(var(--bf,28px)*.38);opacity:.85;margin-top:.25em}
+.bb small{font-family:'Manrope';font-size:calc(var(--bf,28px)*.38);opacity:.85;margin-top:.25em}
 .bb{cursor:pointer;border-radius:4px;transition:opacity .4s,transform .25s,filter .25s,box-shadow .25s;outline:none}
 .bb b{font-size:calc(var(--bf,28px)*var(--k,1))}
 .bb small{font-size:calc(var(--bf,28px)*var(--k,1)*.36)}
@@ -77,7 +80,7 @@ body{overflow-x:clip;overscroll-behavior:none}
 .card .led{font-size:18px}
 #hero{position:absolute;left:0;right:0;top:20vh;text-align:center;z-index:7;padding:0 20px;pointer-events:none}
 #hero .led{font-size:clamp(18px,2.8vh,26px)}
-#hero h1{font-size:clamp(40px,8vw,96px);font-weight:700;line-height:.95;letter-spacing:-.025em;margin:12px 0;text-shadow:0 6px 40px rgba(0,0,0,.7)}
+#hero h1{font-size:clamp(40px,8vw,96px);font-weight:800;line-height:.95;letter-spacing:-.025em;margin:12px 0;text-shadow:0 6px 40px rgba(0,0,0,.7)}
 #hero p{color:var(--dim)}
 #skip{position:fixed;top:78px;right:14px;z-index:20;color:var(--amber);border:1px solid rgba(255,181,71,.5);background:rgba(7,6,11,.7);padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none;backdrop-filter:blur(6px)}
 #end{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;background:linear-gradient(#07060b,#2a1726 55%,#6a3a1c)}
@@ -100,6 +103,7 @@ body{overflow-x:clip;overscroll-behavior:none}
   <div id="hero">
     <div class="led">BOARDING NOW · PLATFORM 1</div>
     <h1>G Pradeep Kumar</h1>
+    <div class="kn" style="color:var(--amber);font-size:clamp(15px,2.2vh,20px);margin:-2px 0 8px">ಮುಂದಿನ ನಿಲ್ದಾಣ · next stop</div>
     <p>Software Engineer · Backend &amp; AI · Bengaluru</p>
   </div>
   <div id="hint" class="led">SCROLL OR SWIPE ▸ NEXT STOP</div>
@@ -173,26 +177,24 @@ const endTop=()=>$('end').offsetTop;
 function toEnd(){window.scrollTo({top:endTop(),behavior:'smooth'})}
 function toRide(){window.scrollTo({top:0,behavior:'smooth'})}
 function step(dir){
-  if(tw){ // a gesture late in a move is remembered and runs on arrival (max one)
-    if((performance.now()-tw.t0)/tw.dur>.12)queued=dir;return}
+  if(tw)return;
   if(dir>0){idx<N-1?go(idx+1):toEnd()}else if(idx>0)go(idx-1)}
 const atRide=()=>window.scrollY<4;
 const between=()=>window.scrollY>=4&&window.scrollY<endTop()-4;
 
-// wheel / trackpad: one deliberate gesture = one stop
-let lastWheel=0,lastAbs=0,spent=false,needPause=false;
+// wheel / trackpad: one scroll = one stop, never more.
+// After a stop is reached, a new scroll counts if there was a pause, or (once the
+// arrival settles) a real push — trackpad momentum tails are tiny and are ignored.
+let lastWheel=0,needPause=false;
 addEventListener('wheel',e=>{
   if(!atRide())return;                       // contact section scrolls normally
   e.preventDefault();
-  const now=performance.now(),gap=now-lastWheel,abs=Math.abs(e.deltaY);lastWheel=now;
-  const rising=abs>lastAbs*1.4+4;lastAbs=abs;   // inertia only ever decays; a rise = a new push
-  if(abs<4||now<cooldownUntil)return;
-  const notch=e.deltaMode===1||(abs>=100&&(abs%100===0||abs%120===0));   // classic mouse-wheel clicks
-  if(gap>180)needPause=false;
-  if(needPause)return;
-  if(gap>180||rising||(notch&&!tw&&now-arrivedAt>120))spent=false;
-  if(spent)return;
-  spent=true;step(Math.sign(e.deltaY))},{passive:false});
+  const now=performance.now(),gap=now-lastWheel,abs=Math.abs(e.deltaY)*(e.deltaMode===1?33:1);lastWheel=now;
+  if(gap>220)needPause=false;
+  if(tw||needPause||abs<4||now<cooldownUntil)return;
+  const settled=now-arrivedAt;
+  if(gap>220||(settled>550&&abs>=24)){needPause=true;step(Math.sign(e.deltaY))}
+},{passive:false});
 
 // touch: one swipe = one stop; never leaves the page half-way between ride and contact
 let ty=null,tStartRide=true;
@@ -211,7 +213,7 @@ addEventListener('keydown',e=>{if(!atRide())return;
 // coming back up from contact: short cooldown so leftover scroll doesn't skip a stop;
 // if the page is left resting half-way, snap to the nearest side
 let wasRide=true,snapT=null;
-addEventListener('scroll',()=>{const r=atRide();if(r&&!wasRide){cooldownUntil=performance.now()+300;spent=true;needPause=true}wasRide=r;
+addEventListener('scroll',()=>{const r=atRide();if(r&&!wasRide){cooldownUntil=performance.now()+300;needPause=true}wasRide=r;
   clearTimeout(snapT);snapT=setTimeout(()=>{if(between())(window.scrollY>endTop()/2?toEnd:toRide)()},220)},{passive:true});
 
 // route map jump
@@ -264,7 +266,7 @@ function render(now){
     c.style.transform=narrow()?`translate(-50%,${(1-v)*16}px)`:`translate(${(1-v)*20}px,-50%)`});
   bbs.forEach((b,k)=>{const on=near===+b.dataset.sc;b.style.opacity=on?clamp(hold*1.6-(k%4)*.2):0;b.style.pointerEvents=on&&hold>.9?'auto':'none'});
   const at=hold>.5;
-  $('btag').textContent=near===N-1&&at?'TERMINUS ▸':(at?'NOW AT ▸':'NEXT STOP ▸');
+  const tag=near===N-1&&at?'TERMINUS ▸':(at?'NOW AT ▸':'NEXT STOP ▸');if($('btag').dataset.t!==tag){$('btag').dataset.t=tag;$('btag').innerHTML=tag==='NEXT STOP ▸'?'<span class="kn" style="font-size:.8em;color:var(--amber)">ಮುಂದಿನ ನಿಲ್ದಾಣ</span> ▸':tag}
   const nm=at?names[near]:names[Math.min(N-1,Math.max(0,tw&&tw.to<tw.from?Math.floor(pos):Math.ceil(pos-.001)))];
   if($('bname').textContent!==nm)$('bname').textContent=nm;
   dots.forEach((d,k)=>d.classList.toggle('on',k<=pos+.01));
