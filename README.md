@@ -4,26 +4,36 @@ My personal portfolio site: software engineer building backend services and AI a
 
 **Live site:** https://PradeepG01.github.io
 
-## What's on it
+## The idea: "Next Stop"
 
-A single-page site in plain HTML, CSS and JavaScript — no framework, no build step.
+The site is a night ride on a Bengaluru metro line. Each scroll or swipe moves the train one station forward, and every station is a chapter of my journey:
 
-- **Hero** — an illustrated figure of me that follows your cursor, waves when you hover and chats when tapped
-- **Demo** — an animated request trace that walks through how my projects process a request
-- **About** — portrait, background and quick facts
-- **Projects** — all my GitHub repos, filterable and expandable:
-  - [ai-support-agent](https://github.com/PradeepG01/ai-support-agent) — LLM support agent with RAG and tool calling
-  - [kyc-orchestrator](https://github.com/PradeepG01/kyc-orchestrator) — fintech verification microservice
-  - [defect-vision](https://github.com/PradeepG01/defect-vision) — industrial defect inspection with PyTorch and OpenCV
-  - [shipment-tracking-service](https://github.com/PradeepG01/shipment-tracking-service) — Spring Boot logistics API
-  - [finance-tracker-api](https://github.com/PradeepG01/finance-tracker-api) — Node.js finance REST API
-  - [credit-risk-prediction](https://github.com/PradeepG01/credit-risk-prediction) — credit default model
-  - [fintech-analytics-dashboard](https://github.com/PradeepG01/fintech-analytics-dashboard) — Streamlit transactions dashboard
-- **Experience** — work history
-- **Skills, certifications and education**
-- **Contact** — email, phone, LinkedIn and a downloadable resume (`G_Pradeep_Kumar_Resume.pdf`)
+1. **Bengaluru** — boarding
+2. **Dayananda Sagar University** — B.Tech, Computer Science (2021–2025)
+3. **BlendVidya** — Python Developer Intern
+4. **LearnFlu** — Team Lead
+5. **Yavhi (Aarde Projects)** — Assistant Manager, Operations
+6. **Project Avenue** — interactive billboards for my projects
+7. **Certification Platform** — interactive panels for my certifications
+8. **Your Team** — the roles I'm open to, then contact
 
-Animations respect the "reduce motion" system setting, and the layout works down to phone widths.
+Hover (or tap on mobile) a billboard or panel to see details, tech stack and links.
+
+## Projects featured
+
+- [ai-support-agent](https://github.com/PradeepG01/ai-support-agent) — LLM support agent with RAG and tool calling
+- [kyc-orchestrator](https://github.com/PradeepG01/kyc-orchestrator) — fintech verification microservice
+- [defect-vision](https://github.com/PradeepG01/defect-vision) — industrial defect inspection with PyTorch and OpenCV
+- [shipment-tracking-service](https://github.com/PradeepG01/shipment-tracking-service) — Spring Boot logistics API
+- [finance-tracker-api](https://github.com/PradeepG01/finance-tracker-api) — Node.js finance REST API
+- [credit-risk-prediction](https://github.com/PradeepG01/credit-risk-prediction) — credit default model
+- [fintech-analytics-dashboard](https://github.com/PradeepG01/fintech-analytics-dashboard) — Streamlit transactions dashboard
+
+## Built with
+
+Plain HTML, CSS and JavaScript — no framework, no build step. Scroll-driven scenes, a canvas rain effect, and a stop-by-stop navigation model (wheel, touch, keyboard and route-map clicks).
+
+The previous single-page version of the site lives at [`/classic`](https://PradeepG01.github.io/classic/).
 
 ## Running locally
 
@@ -40,5 +50,5 @@ Hosted on GitHub Pages from the `main` branch.
 ## Contact
 
 - Email: gpradeepkumar0501@gmail.com
-- LinkedIn: [gpradeepkumar-dev](https://www.linkedin.com/in/g-pradeep-kumar-0a8709331)
+- LinkedIn: [G Pradeep Kumar](https://www.linkedin.com/in/g-pradeep-kumar-0a8709331)
 - GitHub: [@PradeepG01](https://github.com/PradeepG01)
